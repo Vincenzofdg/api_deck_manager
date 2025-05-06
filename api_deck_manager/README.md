@@ -1,0 +1,1 @@
+dotnet add package Swashbuckle.AspNetCore --version 8.1.1
