@@ -10,6 +10,7 @@
         public int Number { get; set; }
         public string ManaCost { get; set; }
         public string Label { get; set; }
+        public string Code { get; set; }
         public bool Foil { get; set; }
     }
 }
