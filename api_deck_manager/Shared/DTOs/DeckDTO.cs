@@ -4,7 +4,7 @@ namespace api_deck_manager.Shared.DTOs;
 
 public class DeckDTO
 {
-    public string Id { get; set; }
+    public string? Id { get; set; }
     [Required(ErrorMessage = "Must have a owner")]
     //[Range(1, long.MaxValue, ErrorMessage = "Must have owner")]
     public string OwnerId { get; set; }

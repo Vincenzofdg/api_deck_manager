@@ -4,7 +4,7 @@ namespace api_deck_manager.Shared.DTOs;
 
 public class CollectionDTO
 {
-    public string Id { get; set; }
+    public string? Id { get; set; }
     [StringLength(150, MinimumLength = 2, ErrorMessage = "Must provide Collection's Name")]
     public string Name { get; set; }
     [Range(1, int.MaxValue, ErrorMessage = "Must provide collection's total number of cards")]
