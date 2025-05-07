@@ -7,6 +7,7 @@ dotnet add package Swashbuckle.AspNetCore --version 8.1.1
 Microsoft.AspNetCore.OpenApi
 Microsoft.EntityFrameworkCore
 Microsoft.EntityFrameworkCore.Tools
+Pomelo.EntityFrameworkCore.MySql
 Swashbuckle.AspNetCore
 xunit
 ```
