@@ -1,6 +1,18 @@
+using api_deck_manager.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var connectionString = builder.Configuration.GetConnectionString("ConnectionStrings");
+
+builder.Services.AddDbContext<ApiConfig>(
+    opts =>
+        opts.UseMySql(
+            connectionString,
+            ServerVersion.AutoDetect(connectionString)
+        )
+);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
