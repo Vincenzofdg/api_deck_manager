@@ -3,6 +3,12 @@
 ### Swagger:
 ```sh
 dotnet add package Swashbuckle.AspNetCore --version 8.1.1
+
+Microsoft.AspNetCore.OpenApi
+Microsoft.EntityFrameworkCore
+Microsoft.EntityFrameworkCore.Tools
+Swashbuckle.AspNetCore
+xunit
 ```
 
 <hr />
