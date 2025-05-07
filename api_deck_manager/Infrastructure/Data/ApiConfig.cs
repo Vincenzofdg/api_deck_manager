@@ -5,7 +5,7 @@ namespace api_deck_manager.Infrastructure.Data
 {
     public class ApiConfig : DbContext
     {
-        public ApiConfig(DbContextOptions<ApiConfig> opts) : base(opts)
+        public ApiConfig(DbContextOptions<ApiConfig> options) : base(options)
         {
             // base(opts) => passagem das opcoes (opts) para o construtor da classe que estamos extendendo (DbContext)
         }

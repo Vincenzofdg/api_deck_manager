@@ -4,6 +4,8 @@ namespace api_deck_manager.Shared.DTOs;
 
 public class CardDTO
 {
+    [Key]
+    [Required]
     public string? Id { get; set; }
     [Required(ErrorMessage = "Must provide Card's collection")]
     //[Range(1, long.MaxValue, ErrorMessage = "Must provide Card's collection")]

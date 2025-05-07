@@ -57,3 +57,19 @@ xunit
     ├── Constants/                  # Globally used constants
     └── Exceptions/                 # Custom exception classes
 ```
+
+<hr />
+
+## Migration and Update Table
+
+### Migrate
+```ssh
+Add-Migration migrationName
+or
+Add-Migration migrationName -OutputDir teste\Migrations
+```
+
+### Update
+```ssh
+Update-Database
+```

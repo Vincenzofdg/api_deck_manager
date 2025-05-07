@@ -4,6 +4,8 @@ namespace api_deck_manager.Shared.DTOs;
 
 public class CollectionDTO
 {
+    [Key]
+    [Required]
     public string? Id { get; set; }
     [StringLength(150, MinimumLength = 2, ErrorMessage = "Must provide Collection's Name")]
     public string Name { get; set; }

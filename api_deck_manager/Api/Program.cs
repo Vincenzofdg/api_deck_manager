@@ -4,15 +4,12 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionString = builder.Configuration.GetConnectionString("ConnectionStrings");
+var connectionString = builder.Configuration.GetConnectionString("DeckManagerConnection");
 
-builder.Services.AddDbContext<ApiConfig>(
-    opts =>
-        opts.UseMySql(
-            connectionString,
-            ServerVersion.AutoDetect(connectionString)
-        )
-);
+builder.Services.AddDbContext<ApiConfig>(options =>
+{
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+});
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>

@@ -1,7 +1,11 @@
-﻿namespace api_deck_manager.Shared.DTOs;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace api_deck_manager.Shared.DTOs;
 
 public class UserDTO
 {
+    [Key]
+    [Required]
     public string? Id { get; set; }
     public string Name { get; set; }
     public string Email { get; set; }

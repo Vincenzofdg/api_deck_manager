@@ -4,6 +4,8 @@ namespace api_deck_manager.Shared.DTOs;
 
 public class TypeDTO
 {
+    [Key]
+    [Required]
     public string? Id { get; set; }
     [Required(ErrorMessage = "Must provide type's name")]
     public string Name { get; set; }
