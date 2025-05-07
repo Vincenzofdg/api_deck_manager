@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using api_deck_manager.Shared.DTOs;
 using api_deck_manager.Shared.Utils;
 using Microsoft.AspNetCore.Mvc;
@@ -44,7 +45,7 @@ public class CardController : ControllerBase
     }
 
     [HttpGet(Name = "GetCard")]
-    public IEnumerable<CardDTO> Get([FromQuery] string skip, [FromQuery] string take)
+    public IEnumerable<CardDTO> Get([FromQuery] string skip = "0", [FromQuery] string take = "20")
     {
         return _mockedList
             .Skip(Convert.ToInt32(skip))
@@ -52,18 +53,58 @@ public class CardController : ControllerBase
     }
 
     [HttpGet("{cardId}", Name = "GetCardById")]
-    public string GetById([FromRoute] string cardId)
+    public IActionResult GetById([FromRoute] string cardId)
     {
-        return cardId;
+        var result = _mockedList.FirstOrDefault(card => card.Id == cardId);
+
+        if (result == null)
+            return NotFound();
+
+
+        return Ok(result);
     }
 
 
     [HttpPost(Name = "AddCard")]
-    public string CreateCard([FromBody] CardDTO card)
+    public IActionResult CreateCard([FromBody] CardDTO card)
     {
-        var cardId = IdGenerator.GenerateUniqueId();
-        return "[" + cardId + "] " + card.Name + " has been saved.";
-    }
+        var newId = IdGenerator.GenerateUniqueId();
+        CardDTO cardToBeAdded = new CardDTO()
+        {
+            Id = newId,
+            CollectionId = card.CollectionId,
+            OwnerId = card.OwnerId,
+            CustomDeckId = card.CustomDeckId,
+            Name = card.Name,
+            Description = card.Description,
+            Number = card.Number,
+            ManaCost = card.ManaCost,
+            Label = card.Label,
+            Code = card.Code,
+            Foil = card.Foil,
+        };
 
-    
+        //List<CardDTO> updatedList = new List<CardDTO>(_mockedList)
+        //{
+        //    new CardDTO
+        //    {
+        //        Id = newId,
+        //        CollectionId = card.CollectionId,
+        //        OwnerId = card.OwnerId,
+        //        CustomDeckId = card.CustomDeckId,
+        //        Name = card.Name,
+        //        Description = card.Description,
+        //        Number = card.Number,
+        //        ManaCost = card.ManaCost,
+        //        Label = card.Label,
+        //        Code = card.Code,
+        //        Foil = card.Foil,
+        //    }
+        //};
+
+        this._mockedList = new List<CardDTO>(_mockedList) { cardToBeAdded };
+
+        //return "[" + newId + "] " + card.Name + " has been saved.";
+        return CreatedAtAction(nameof(GetById), new { cardId = newId }, cardToBeAdded);
+    }
 }
