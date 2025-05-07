@@ -4,6 +4,7 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// https://learn.microsoft.com/pt-br/ef/core/cli/dbcontext-creation?tabs=dotnet-core-cli
 var connectionString = builder.Configuration.GetConnectionString("DeckManagerConnection");
 
 builder.Services.AddDbContext<ApiConfig>(options =>
