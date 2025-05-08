@@ -4,8 +4,7 @@ using api_deck_manager.Shared.DTOs;
 using api_deck_manager.Shared.Extensions;
 using api_deck_manager.Shared.Utils;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.JsonPatch;
-
+using System.Text.Json;
 
 namespace api_deck_manager.Api.Controllers;
 
@@ -75,9 +74,15 @@ public class CardController : ControllerBase
     [HttpPatch("{cardId}", Name = "UpdateCardPartial")]
     public IActionResult UpdateCardPartial(
         [FromRoute] string cardId,
-        [FromBody] JsonPatchDocument<CardEntity> patchPayload)
+        [FromBody] JsonElement patchPayload)
     {
-        if (patchPayload == null)
+        List<string> updatedFields = [];
+
+        //[
+        //  { "op": "replace", "path": "/collectionId", "value": "12" }
+        //]
+
+        if (patchPayload.ValueKind != JsonValueKind.Array)
             return BadRequest();
 
         var targetCard = _context.Cards.FirstOrDefault(c => c.Id == cardId);
@@ -85,23 +90,29 @@ public class CardController : ControllerBase
         if (targetCard == null)
             return NotFound();
 
-        // Aplica o patch na entidade existente
-        patchPayload.ApplyTo(targetCard, error =>
+        foreach (var operation in patchPayload.EnumerateArray())
         {
-            if (error.Operation != null)
-            {
-                ModelState.AddModelError(
-                    error.Operation.path,
-                    "Erro ao aplicar a operação de patch."
-                );
-            }
-        });
+            var op = operation.GetProperty("op").GetString();
+            var path = operation.GetProperty("path").GetString();
+            var value = operation.GetProperty("value");
 
-        if (!ModelState.IsValid)
-            return BadRequest(ModelState);
+            if (op == "replace" && path != null)
+            {
+                PatchOperator.Card(targetCard, path, value);
+                updatedFields.Add(path.TrimStart('/'));
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
 
         _context.SaveChanges();
 
-        return NoContent();
+        return Accepted(
+            new { 
+                message = $"Field(s) {string.Join(", ", updatedFields)} have been updated"
+            }
+        );
     }
 }
