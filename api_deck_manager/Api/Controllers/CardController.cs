@@ -1,6 +1,7 @@
 ﻿using api_deck_manager.Infrastructure.Data;
 using api_deck_manager.Infrastructure.Entities;
 using api_deck_manager.Shared.DTOs;
+using api_deck_manager.Shared.Extensions;
 using api_deck_manager.Shared.Utils;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,6 +21,8 @@ public class CardController : ControllerBase
     [HttpGet(Name = "GetCard")]
     public IEnumerable<CardEntity> Get([FromQuery] int skip = 0, [FromQuery] int take = 20)
     {
+        if (take > 100) take = 100;
+
         return _context.Cards
             .Skip(skip)
             .Take(take);
@@ -43,35 +46,8 @@ public class CardController : ControllerBase
     {
         var newId = IdGenerator.GenerateUniqueId();
 
-        CardEntity cardToBeAdded = new CardEntity()
-        {
-            Id = newId,
-            CollectionId = card.CollectionId,
-            OwnerId = card.OwnerId,
-            CustomDeckId = card.CustomDeckId,
-            Name = card.Name,
-            Description = card.Description,
-            Number = card.Number,
-            ManaCost = card.ManaCost,
-            Label = card.Label,
-            Code = card.Code,
-            Foil = card.Foil,
-        };
-
-        var responseDto = new CardResponseDTO
-        {
-            Id = newId,
-            CollectionId = card.CollectionId,
-            OwnerId = card.OwnerId,
-            CustomDeckId = card.CustomDeckId,
-            Name = card.Name,
-            Description = card.Description,
-            Number = card.Number,
-            ManaCost = card.ManaCost,
-            Label = card.Label,
-            Code = card.Code,
-            Foil = card.Foil
-        };
+        var cardToBeAdded = card.ToEntity(newId);
+        var responseDto = cardToBeAdded.ToResponseDTO();
 
         _context.Cards.Add(cardToBeAdded);
         _context.SaveChanges();
