@@ -4,6 +4,8 @@ using api_deck_manager.Shared.DTOs;
 using api_deck_manager.Shared.Extensions;
 using api_deck_manager.Shared.Utils;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.JsonPatch;
+
 
 namespace api_deck_manager.Api.Controllers;
 
@@ -64,6 +66,39 @@ public class CardController : ControllerBase
             return NotFound();
 
         targetCard.UpdateFromDTO(payload);
+
+        _context.SaveChanges();
+
+        return NoContent();
+    }
+
+    [HttpPatch("{cardId}", Name = "UpdateCardPartial")]
+    public IActionResult UpdateCardPartial(
+        [FromRoute] string cardId,
+        [FromBody] JsonPatchDocument<CardEntity> patchPayload)
+    {
+        if (patchPayload == null)
+            return BadRequest();
+
+        var targetCard = _context.Cards.FirstOrDefault(c => c.Id == cardId);
+
+        if (targetCard == null)
+            return NotFound();
+
+        // Aplica o patch na entidade existente
+        patchPayload.ApplyTo(targetCard, error =>
+        {
+            if (error.Operation != null)
+            {
+                ModelState.AddModelError(
+                    error.Operation.path,
+                    "Erro ao aplicar a operação de patch."
+                );
+            }
+        });
+
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
 
         _context.SaveChanges();
 
