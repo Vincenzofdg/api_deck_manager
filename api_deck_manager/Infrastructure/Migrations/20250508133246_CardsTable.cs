@@ -5,7 +5,7 @@
 namespace api_deck_manager.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class FirstMigration : Migration
+    public partial class CardsTable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -14,7 +14,7 @@ namespace api_deck_manager.Infrastructure.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Card",
+                name: "Cards",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "varchar(255)", nullable: false)
@@ -40,7 +40,7 @@ namespace api_deck_manager.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Card", x => x.Id);
+                    table.PrimaryKey("PK_Cards", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
         }
@@ -49,7 +49,7 @@ namespace api_deck_manager.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Card");
+                name: "Cards");
         }
     }
 }

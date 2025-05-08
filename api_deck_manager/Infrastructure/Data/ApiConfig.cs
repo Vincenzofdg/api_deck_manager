@@ -10,6 +10,6 @@ namespace api_deck_manager.Infrastructure.Data
             // base(opts) => passagem das opcoes (opts) para o construtor da classe que estamos extendendo (DbContext)
         }
 
-        public DbSet<CardDTO> Card { get; set; }
+        public DbSet<CardDTO> Cards { get; set; }
     }
 }

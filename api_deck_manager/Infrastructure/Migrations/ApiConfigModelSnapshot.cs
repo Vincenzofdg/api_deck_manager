@@ -67,7 +67,7 @@ namespace api_deck_manager.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Card");
+                    b.ToTable("Cards");
                 });
 #pragma warning restore 612, 618
         }

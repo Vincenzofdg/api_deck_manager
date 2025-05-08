@@ -11,8 +11,8 @@ using api_deck_manager.Infrastructure.Data;
 namespace api_deck_manager.Infrastructure.Migrations
 {
     [DbContext(typeof(ApiConfig))]
-    [Migration("20250507201202_FirstMigration")]
-    partial class FirstMigration
+    [Migration("20250508133246_CardsTable")]
+    partial class CardsTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -70,7 +70,7 @@ namespace api_deck_manager.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Card");
+                    b.ToTable("Cards");
                 });
 #pragma warning restore 612, 618
         }
