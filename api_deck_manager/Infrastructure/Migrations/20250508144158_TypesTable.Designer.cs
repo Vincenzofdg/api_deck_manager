@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using api_deck_manager.Infrastructure.Data;
 
@@ -10,9 +11,11 @@ using api_deck_manager.Infrastructure.Data;
 namespace api_deck_manager.Infrastructure.Migrations
 {
     [DbContext(typeof(ApiConfig))]
-    partial class ApiConfigModelSnapshot : ModelSnapshot
+    [Migration("20250508144158_TypesTable")]
+    partial class TypesTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
