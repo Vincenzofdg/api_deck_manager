@@ -27,4 +27,6 @@ public class CardDTO
     public string Code { get; set; }
 
     public bool Foil { get; set; }
+
+    //public DateTime test { get; set; } = DateTime.Now;
 }

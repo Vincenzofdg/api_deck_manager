@@ -17,17 +17,18 @@ public class CardController : ControllerBase
     public CardController(ApiConfig context) => _context = context;
 
     [HttpGet(Name = "GetCard")]
-    public IEnumerable<CardEntity> Get([FromQuery] int skip = 0, [FromQuery] int take = 20)
+    public IEnumerable<CardDTO> Get([FromQuery] int skip = 0, [FromQuery] int take = 20)
     {
         if (take > 100) take = 100;
 
         return _context.Cards
             .Skip(skip)
-            .Take(take);
+            .Take(take)
+            .Select(card => card.ToResponseDTO());
     }
 
     [HttpGet("{cardId}", Name = "GetCardById")]
-    public IActionResult GetById([FromRoute] string cardId)
+    public ActionResult<CardResponseDTO> GetById([FromRoute] string cardId)
     {
         var result = _context.Cards
             .FirstOrDefault(card => card.Id == cardId);
@@ -35,7 +36,7 @@ public class CardController : ControllerBase
         if (result == null)
             return NotFound();
 
-        return Ok(result);
+        return Accepted(result.ToResponseDTO());
     }
 
 
@@ -112,4 +113,26 @@ public class CardController : ControllerBase
             }
         );
     }
+
+    [HttpDelete("{cardId}", Name = "DeleteCard")]
+    public IActionResult DeleteCard([FromRoute] string cardId)
+    {
+        var targetCard = _context.Cards.Find(cardId);
+
+        if (targetCard == null)
+            return NotFound();
+
+        _context.Remove(targetCard);
+        _context.SaveChanges();
+
+        return Accepted(
+            new
+            {
+                message = "Card successfully deleted",
+                id = targetCard.Id,
+                name = targetCard.Name
+            }
+        );
+    }
+
 }
