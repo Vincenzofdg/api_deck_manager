@@ -4,6 +4,10 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Configuration
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("Api/appsettings.json", optional: false, reloadOnChange: true);
+
 // https://learn.microsoft.com/pt-br/ef/core/cli/dbcontext-creation?tabs=dotnet-core-cli
 var connectionString = builder.Configuration.GetConnectionString("DeckManagerConnection");
 
