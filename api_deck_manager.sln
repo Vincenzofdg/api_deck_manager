@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35931.197 d17.13
+VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "api_deck_manager", "api_deck_manager\api_deck_manager.csproj", "{CABC2B09-29A0-429D-86D2-14C31A991035}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "api_deck_manager\Api.csproj", "{CABC2B09-29A0-429D-86D2-14C31A991035}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

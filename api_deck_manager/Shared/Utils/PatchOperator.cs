@@ -1,7 +1,7 @@
-﻿using api_deck_manager.Infrastructure.Entities;
+﻿using Api.Infrastructure.Entities;
 using System.Text.Json;
 
-namespace api_deck_manager.Shared.Utils;
+namespace Api.Shared.Utils;
 
 public static class PatchOperator
 {

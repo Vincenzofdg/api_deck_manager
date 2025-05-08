@@ -1,7 +1,7 @@
-﻿using api_deck_manager.Infrastructure.Entities;
+﻿using Api.Infrastructure.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace api_deck_manager.Infrastructure.Data
+namespace Api.Infrastructure.Data
 {
     public class ApiConfig : DbContext
     {

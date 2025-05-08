@@ -1,7 +1,7 @@
-﻿using api_deck_manager.Infrastructure.Entities;
-using api_deck_manager.Shared.DTOs;
+﻿using Api.Infrastructure.Entities;
+using Api.Shared.DTOs;
 
-namespace api_deck_manager.Shared.Extensions
+namespace Api.Shared.Extensions
 {
     public static class CardExtension
     {

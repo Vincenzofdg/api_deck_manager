@@ -1,4 +1,4 @@
-﻿namespace api_deck_manager.Shared.Utils;
+﻿namespace Api.Shared.Utils;
 
 public static class IdGenerator
 {

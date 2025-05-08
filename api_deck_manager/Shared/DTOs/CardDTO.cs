@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace api_deck_manager.Shared.DTOs;
+namespace Api.Shared.DTOs;
 
 public class CardDTO
 {

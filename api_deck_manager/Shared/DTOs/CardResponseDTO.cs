@@ -1,4 +1,4 @@
-﻿namespace api_deck_manager.Shared.DTOs;
+﻿namespace Api.Shared.DTOs;
 
 public class CardResponseDTO : CardDTO
 {

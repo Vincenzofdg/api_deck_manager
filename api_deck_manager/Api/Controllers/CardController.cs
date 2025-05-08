@@ -1,13 +1,13 @@
-﻿using api_deck_manager.Infrastructure.Data;
-using api_deck_manager.Infrastructure.Entities;
-using api_deck_manager.Shared.DTOs;
-using api_deck_manager.Shared.Extensions;
-using api_deck_manager.Shared.Utils;
+﻿using Api.Infrastructure.Data;
+using Api.Infrastructure.Entities;
+using Api.Shared.DTOs;
+using Api.Shared.Extensions;
+using Api.Shared.Utils;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Text.Json;
 
-namespace api_deck_manager.Api.Controllers;
+namespace Api.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]

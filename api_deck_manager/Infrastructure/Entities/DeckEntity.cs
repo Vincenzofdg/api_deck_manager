@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace api_deck_manager.Infrastructure.Entities;
+namespace Api.Infrastructure.Entities;
 
 public class DeckEntity
 {

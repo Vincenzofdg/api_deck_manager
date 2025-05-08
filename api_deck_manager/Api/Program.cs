@@ -1,5 +1,5 @@
 using System.Reflection;
-using api_deck_manager.Infrastructure.Data;
+using Api.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
