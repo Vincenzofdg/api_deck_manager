@@ -21,7 +21,7 @@ namespace api_deck_manager.Infrastructure.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
-            modelBuilder.Entity("api_deck_manager.Shared.DTOs.CardDTO", b =>
+            modelBuilder.Entity("api_deck_manager.Infrastructure.Entities.CardEntity", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("varchar(255)");

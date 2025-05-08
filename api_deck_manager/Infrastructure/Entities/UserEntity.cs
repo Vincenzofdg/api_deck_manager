@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace api_deck_manager.Shared.DTOs;
+namespace api_deck_manager.Infrastructure.Entities;
 
-public class UserDTO
+public class UserEntity
 {
     [Key]
     [Required]

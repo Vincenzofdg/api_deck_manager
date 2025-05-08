@@ -11,7 +11,7 @@ using api_deck_manager.Infrastructure.Data;
 namespace api_deck_manager.Infrastructure.Migrations
 {
     [DbContext(typeof(ApiConfig))]
-    [Migration("20250508133246_CardsTable")]
+    [Migration("20250508143110_CardsTable")]
     partial class CardsTable
     {
         /// <inheritdoc />
@@ -24,7 +24,7 @@ namespace api_deck_manager.Infrastructure.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
-            modelBuilder.Entity("api_deck_manager.Shared.DTOs.CardDTO", b =>
+            modelBuilder.Entity("api_deck_manager.Infrastructure.Entities.CardEntity", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("varchar(255)");
