@@ -14,10 +14,7 @@ public class CardController : ControllerBase
 {
     private readonly ApiConfig _context;
 
-    public CardController(ApiConfig context)
-    {
-        _context = context;
-    }
+    public CardController(ApiConfig context) => _context = context;
 
     [HttpGet(Name = "GetCard")]
     public IEnumerable<CardEntity> Get([FromQuery] int skip = 0, [FromQuery] int take = 20)
