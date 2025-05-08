@@ -59,5 +59,18 @@ namespace api_deck_manager.Shared.Extensions
             };
         }
 
+        public static void UpdateFromDTO(this CardEntity entity, CardDTO dto)
+        {
+            entity.CollectionId = dto.CollectionId;
+            entity.OwnerId = dto.OwnerId;
+            entity.CustomDeckId = dto.CustomDeckId;
+            entity.Name = dto.Name;
+            entity.Description = dto.Description;
+            entity.Number = dto.Number;
+            entity.ManaCost = dto.ManaCost;
+            entity.Label = dto.Label;
+            entity.Code = dto.Code;
+            entity.Foil = dto.Foil;
+        }
     }
 }

@@ -54,4 +54,19 @@ public class CardController : ControllerBase
 
         return CreatedAtAction(nameof(GetById), new { cardId = newId }, responseDto);
     }
+
+    [HttpPut("{cardId}", Name = "UpdateCard")]
+    public IActionResult UpdateCard([FromRoute] string cardId, [FromBody] CardDTO payload)
+    {
+        CardEntity? targetCard = _context.Cards.FirstOrDefault(c => c.Id == cardId);
+
+        if (targetCard == null)
+            return NotFound();
+
+        targetCard.UpdateFromDTO(payload);
+
+        _context.SaveChanges();
+
+        return NoContent();
+    }
 }
