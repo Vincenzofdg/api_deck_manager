@@ -1,3 +1,4 @@
+using System.Reflection;
 using api_deck_manager.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -26,6 +27,15 @@ builder.Services.AddSwaggerGen(c =>
             Title = "Deck Manager API",
             Description = "Organize and build your Deck",
             Version = "v1" });
+    //var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    ////if (File.Exists(xmlFile))
+    ////{
+    ////    c.IncludeXmlComments(xmlFile);
+    ////}
+    //c.IncludeXmlComments(xmlFile);
+
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, "api_deck_manager.xml");
+    c.IncludeXmlComments(xmlPath);
 });
 
 

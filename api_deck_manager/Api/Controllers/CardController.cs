@@ -4,6 +4,7 @@ using api_deck_manager.Shared.DTOs;
 using api_deck_manager.Shared.Extensions;
 using api_deck_manager.Shared.Utils;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 using System.Text.Json;
 
 namespace api_deck_manager.Api.Controllers;
@@ -17,6 +18,7 @@ public class CardController : ControllerBase
     public CardController(ApiConfig context) => _context = context;
 
     [HttpGet(Name = "GetCard")]
+    [ProducesResponseType(statusCode: 200)]
     public IEnumerable<CardDTO> Get([FromQuery] int skip = 0, [FromQuery] int take = 20)
     {
         if (take > 100) take = 100;
@@ -28,6 +30,12 @@ public class CardController : ControllerBase
     }
 
     [HttpGet("{cardId}", Name = "GetCardById")]
+    //[ProducesResponseType(statusCode: 200, Type = typeof(CardResponseDTO))]
+    //[ProducesResponseType(statusCode: 404)]
+    [SwaggerOperation(
+    Summary = "Obtém um cartão pelo ID",
+    Description = "Retorna os detalhes de um cartão com base no ID fornecido.")]
+    //[SwaggerResponse(200, "Lista de cartões.", typeof(IEnumerable<CardDTO>))]
     public ActionResult<CardResponseDTO> GetById([FromRoute] string cardId)
     {
         var result = _context.Cards
@@ -41,6 +49,7 @@ public class CardController : ControllerBase
 
 
     [HttpPost(Name = "AddCard")]
+    [ProducesResponseType(statusCode: 201)]
     public IActionResult CreateCard([FromBody] CardDTO card)
     {
         var newId = IdGenerator.GenerateUniqueId();
@@ -55,6 +64,7 @@ public class CardController : ControllerBase
     }
 
     [HttpPut("{cardId}", Name = "UpdateCard")]
+    [ProducesResponseType(statusCode: 204)]
     public IActionResult UpdateCard([FromRoute] string cardId, [FromBody] CardDTO payload)
     {
         CardEntity? targetCard = _context.Cards.FirstOrDefault(c => c.Id == cardId);
@@ -70,6 +80,7 @@ public class CardController : ControllerBase
     }
 
     [HttpPatch("{cardId}", Name = "UpdateCardPartial")]
+    [ProducesResponseType(StatusCodes.Status202Accepted)]
     public IActionResult UpdateCardPartial(
         [FromRoute] string cardId,
         [FromBody] JsonElement patchPayload)
@@ -115,6 +126,7 @@ public class CardController : ControllerBase
     }
 
     [HttpDelete("{cardId}", Name = "DeleteCard")]
+    [ProducesResponseType(statusCode: 202)]
     public IActionResult DeleteCard([FromRoute] string cardId)
     {
         var targetCard = _context.Cards.Find(cardId);
