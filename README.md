@@ -10,6 +10,7 @@ Microsoft.EntityFrameworkCore.Tools
 Pomelo.EntityFrameworkCore.MySql
 Swashbuckle.AspNetCore
 xunit
+DotNetEnv
 ```
 
 <hr />
