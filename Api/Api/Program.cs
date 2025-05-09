@@ -4,19 +4,22 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
-
 builder.Configuration
     .SetBasePath(Directory.GetCurrentDirectory())
     .AddJsonFile("Api/appsettings.json", optional: false, reloadOnChange: true);
 
 // https://learn.microsoft.com/pt-br/ef/core/cli/dbcontext-creation?tabs=dotnet-core-cli
-// Carrega .env
+// Loads .env file
 DotNetEnv.Env.Load();
 
-// Pega do env e injeta no Configuration
+string server = Environment.GetEnvironmentVariable("SERVER") ?? throw new Exception("Define 'SERVER' at .env file");
+string port = Environment.GetEnvironmentVariable("PORT") ?? throw new Exception("Define 'PORT' at .env file");
+string database = Environment.GetEnvironmentVariable("DATABASE") ?? throw new Exception("Define 'DATABASE' at .env file");
+string user = Environment.GetEnvironmentVariable("USER") ?? throw new Exception("Define 'USER' at .env file");
+string password = Environment.GetEnvironmentVariable("PASSWORD") ?? throw new Exception("Define 'PASSWORD' at .env file");
+
 // var connectionString = builder.Configuration.GetConnectionString("DeckManagerConnection");
-var connectionString = Environment.GetEnvironmentVariable("DECKMANAGER_CONNECTION");
+string connectionString = $"server={server};port={port};database={database};user={user};password={password}";
 builder.Configuration["ConnectionStrings:DeckManagerConnection"] = connectionString;
 
 builder.Services.AddDbContext<ApiConfig>(options =>
@@ -60,8 +63,6 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-//app.UseHttpsRedirection();
-//app.UseAuthorization();
 app.MapControllers();
 
 app.MapGet("/", context =>
