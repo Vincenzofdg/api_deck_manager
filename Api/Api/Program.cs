@@ -1,4 +1,5 @@
 using Api.Infrastructure.Data;
+using Api.Shared.Services.Card;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -20,7 +21,6 @@ string database = Environment.GetEnvironmentVariable("DATABASE") ?? throw new Ex
 string user = Environment.GetEnvironmentVariable("USER") ?? throw new Exception("Define 'USER' at .env file");
 string password = Environment.GetEnvironmentVariable("PASSWORD") ?? throw new Exception("Define 'PASSWORD' at .env file");
 
-// var connectionString = builder.Configuration.GetConnectionString("DeckManagerConnection");
 string connectionString = $"server={server};port={port};database={database};user={user};password={password}";
 builder.Configuration["ConnectionStrings:DeckManagerConnection"] = connectionString;
 
@@ -28,6 +28,9 @@ builder.Services.AddDbContext<ApiConfig>(options =>
 {
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
+
+// Add services to Scope
+builder.Services.AddScoped<ICardService, CardService>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
@@ -40,15 +43,6 @@ builder.Services.AddSwaggerGen(c =>
             Description = "Organize and build your Deck",
             Version = "v1"
         });
-    //var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-    ////if (File.Exists(xmlFile))
-    ////{
-    ////    c.IncludeXmlComments(xmlFile);
-    ////}
-    //c.IncludeXmlComments(xmlFile);
-
-    //var xmlPath = Path.Combine(AppContext.BaseDirectory, "api_deck_manager.xml");
-    //c.IncludeXmlComments(xmlPath);
 });
 
 
