@@ -1,7 +1,8 @@
 var builder = DistributedApplication.CreateBuilder(args);
 
-builder.AddProject<Projects.Api>("Backend");
+var api = builder.AddProject<Projects.Api>("Backend");
 
-builder.AddProject<Projects.Website>("Website");
+builder.AddProject<Projects.Website>("Website")
+    .WithReference(api);
 
 builder.Build().Run();
