@@ -16,7 +16,8 @@ public class CardService : ICardService
     public IQueryable<CardResponseDTO> GetAll()
     {
         return _context.Cards
-             .Select(card => card.ToResponseDTO());
+            .OrderBy(c => c.Id)
+            .Select(card => card.ToResponseDTO());
     }
 
     public CardResponseDTO? GetById(string cardId)
