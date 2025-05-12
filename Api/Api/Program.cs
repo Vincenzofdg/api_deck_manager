@@ -4,6 +4,8 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.AddServiceDefaults();
+
 builder.Configuration
     .SetBasePath(Directory.GetCurrentDirectory())
     .AddJsonFile("Api/appsettings.json", optional: false, reloadOnChange: true);
@@ -44,8 +46,8 @@ builder.Services.AddSwaggerGen(c =>
     ////}
     //c.IncludeXmlComments(xmlFile);
 
-    var xmlPath = Path.Combine(AppContext.BaseDirectory, "api_deck_manager.xml");
-    c.IncludeXmlComments(xmlPath);
+    //var xmlPath = Path.Combine(AppContext.BaseDirectory, "api_deck_manager.xml");
+    //c.IncludeXmlComments(xmlPath);
 });
 
 
@@ -53,6 +55,8 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
+
+app.MapDefaultEndpoints();
 
 if (app.Environment.IsDevelopment())
 {

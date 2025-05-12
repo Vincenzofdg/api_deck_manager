@@ -7,6 +7,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "Api\Api.csproj", "{C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{9F69365D-9B00-4E32-919B-860D8D8DE44E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aspire.AppHost", "Aspire.AppHost\Aspire.AppHost.csproj", "{1D28264D-B501-45D5-855F-B929A5DC799D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aspire.ServiceDefaults", "Aspire.ServiceDefaults\Aspire.ServiceDefaults.csproj", "{90640AB5-B40F-EB9A-9160-59682C5D022E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Orchestrator", "Orchestrator", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backend", "Backend", "{FB785043-FB86-4501-B1FA-AE1D13B8B3C8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,9 +29,23 @@ Global
 		{9F69365D-9B00-4E32-919B-860D8D8DE44E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F69365D-9B00-4E32-919B-860D8D8DE44E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F69365D-9B00-4E32-919B-860D8D8DE44E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D28264D-B501-45D5-855F-B929A5DC799D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D28264D-B501-45D5-855F-B929A5DC799D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D28264D-B501-45D5-855F-B929A5DC799D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D28264D-B501-45D5-855F-B929A5DC799D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90640AB5-B40F-EB9A-9160-59682C5D022E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90640AB5-B40F-EB9A-9160-59682C5D022E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90640AB5-B40F-EB9A-9160-59682C5D022E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90640AB5-B40F-EB9A-9160-59682C5D022E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CABC2B09-29A0-429D-86D2-14C31A991035} = {FB785043-FB86-4501-B1FA-AE1D13B8B3C8}
+		{9F69365D-9B00-4E32-919B-860D8D8DE44E} = {FB785043-FB86-4501-B1FA-AE1D13B8B3C8}
+		{1D28264D-B501-45D5-855F-B929A5DC799D} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{90640AB5-B40F-EB9A-9160-59682C5D022E} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {90A00300-4509-4262-9709-EB9A069BCD86}
