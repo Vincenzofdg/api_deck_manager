@@ -1,5 +1,5 @@
-﻿using Api.Infrastructure.Entities;
-using System.Text.Json;
+﻿using System.Text.Json;
+using Api.Infrastructure.Entities;
 
 namespace Api.Shared.Utils;
 

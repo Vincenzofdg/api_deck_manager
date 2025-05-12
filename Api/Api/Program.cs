@@ -35,10 +35,11 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc(
         "v1",
         new OpenApiInfo
-        { 
+        {
             Title = "Deck Manager API",
             Description = "Organize and build your Deck",
-            Version = "v1" });
+            Version = "v1"
+        });
     //var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     ////if (File.Exists(xmlFile))
     ////{

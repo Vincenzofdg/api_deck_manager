@@ -1,7 +1,4 @@
-﻿using Api.Shared.DTOs;
-using Api.Shared.Utils;
-
-namespace Test;
+﻿namespace Test;
 
 public class CardDTOTest
 {

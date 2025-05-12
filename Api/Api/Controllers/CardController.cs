@@ -1,11 +1,11 @@
-﻿using Api.Infrastructure.Data;
+﻿using System.Text.Json;
+using Api.Infrastructure.Data;
 using Api.Infrastructure.Entities;
 using Api.Shared.DTOs;
 using Api.Shared.Extensions;
 using Api.Shared.Utils;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
-using System.Text.Json;
 
 namespace Api.Api.Controllers;
 
@@ -119,7 +119,8 @@ public class CardController : ControllerBase
         _context.SaveChanges();
 
         return Accepted(
-            new { 
+            new
+            {
                 message = $"Field(s) {string.Join(", ", updatedFields)} have been updated"
             }
         );
