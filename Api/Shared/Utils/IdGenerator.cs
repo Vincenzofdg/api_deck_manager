@@ -14,9 +14,7 @@ public static class IdGenerator
     private static string GenerateRandomString(int length)
     {
         const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        Random random = new Random();
-        return new string(Enumerable.Range(0, length)
-            .Select(_ => chars[random.Next(chars.Length)])
-            .ToArray());
+        Random random = new ();
+        return new string([.. Enumerable.Range(0, length).Select(_ => chars[random.Next(chars.Length)])]);
     }
 }

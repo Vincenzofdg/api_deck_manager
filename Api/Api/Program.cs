@@ -1,5 +1,6 @@
-using Api.Infrastructure.Data;
-using Api.Shared.Services.Card;
+using Api.Infrastructure;
+using Api.Infrastructure.Services;
+using Api.Shared.Interfaces.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -31,6 +32,7 @@ builder.Services.AddDbContext<ApiConfig>(options =>
 
 // Add services to Scope
 builder.Services.AddScoped<ICardService, CardService>();
+builder.Services.AddScoped<ICollectionService, CollectionService>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>

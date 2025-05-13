@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
-using Api.Shared.DTOs;
+using Model.DTOs.Card;
 
-namespace Api.Shared.Services.Card;
+namespace Api.Shared.Interfaces.Services;
 
 public interface ICardService
 {

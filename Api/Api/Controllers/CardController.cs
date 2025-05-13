@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
-using Api.Shared.DTOs;
-using Api.Shared.Services.Card;
+using Api.Shared.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
+using Model.DTOs.Card;
 
 namespace Api.Api.Controllers;
 

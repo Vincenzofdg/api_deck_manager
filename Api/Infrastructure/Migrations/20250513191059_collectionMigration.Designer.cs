@@ -3,16 +3,19 @@ using Api.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace api_deck_manager.Infrastructure.Migrations
+namespace Api.Infrastructure.Migrations
 {
     [DbContext(typeof(ApiConfig))]
-    partial class ApiConfigModelSnapshot : ModelSnapshot
+    [Migration("20250513191059_collectionMigration")]
+    partial class collectionMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -1,5 +1,5 @@
 ﻿using Api.Infrastructure.Entities;
-using Api.Shared.DTOs;
+using Model.DTOs.Card;
 
 namespace Api.Shared.Extensions
 {

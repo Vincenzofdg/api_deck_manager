@@ -1,11 +1,11 @@
 ﻿using System.Text.Json;
-using Api.Infrastructure.Data;
 using Api.Infrastructure.Entities;
-using Api.Shared.DTOs;
 using Api.Shared.Extensions;
+using Api.Shared.Interfaces.Services;
 using Api.Shared.Utils;
+using Model.DTOs.Card;
 
-namespace Api.Shared.Services.Card;
+namespace Api.Infrastructure.Services;
 
 public class CardService : ICardService
 {
