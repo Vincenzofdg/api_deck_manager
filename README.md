@@ -1,4 +1,7 @@
-﻿## Packages
+## Database Structure
+![db_schema](.planning/db_schema.png)
+ 
+ ## Packages
 
 ### Swagger:
 ```sh
