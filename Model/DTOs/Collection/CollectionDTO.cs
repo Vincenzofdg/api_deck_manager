@@ -8,6 +8,7 @@ public class CollectionDTO : ICollectionDTO
     [StringLength(150, MinimumLength = 2, ErrorMessage = "Must provide Collection's Name")]
     public required string Name { get; set; }
     [Range(1, int.MaxValue, ErrorMessage = "Must provide collection's total number of cards")]
+    public string Description { get; set; } = string.Empty;
     public int Amount { get; set; }
     [Required(ErrorMessage = "Must provide icon for collection")]
     public required string IconUrl { get; set; }
