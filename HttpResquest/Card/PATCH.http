@@ -1,0 +1,20 @@
+@api = https://localhost:3001
+@endpoint = card
+@card_id = 200525-6HdA5s-105531
+
+PATCH {{api}}/{{endpoint}}/{{card_id}}
+Accept: application/json
+Content-Type: application/json
+[
+  
+  { 
+      "op": "replace", 
+      "path": "/name", 
+      "value": "Divine Lightning"
+  },
+  {
+      "op": "replace",
+      "path": "/description",
+      "value": "Deals 3"
+  }
+]

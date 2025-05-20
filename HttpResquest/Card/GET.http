@@ -1,0 +1,13 @@
+@api = https://localhost:3001
+@endpoint = card
+@card_id = 200525-2uBPgf-103620
+
+GET {{api}}/{{endpoint}}/
+Accept: application/json
+
+###
+
+GET {{api}}/{{endpoint}}/{{card_id}}
+Accept: application/json
+
+###

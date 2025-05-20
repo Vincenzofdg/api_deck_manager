@@ -1,0 +1,8 @@
+@api = https://localhost:3001
+@endpoint = card
+@card_id = 200525-2uBPgf-103620
+
+DELETE {{api}}/{{endpoint}}/{{card_id}}
+Accept: application/json
+
+###

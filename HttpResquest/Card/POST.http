@@ -1,0 +1,18 @@
+@api = https://localhost:3001
+@endpoint = card
+
+POST {{api}}/{{endpoint}}/
+Accept: application/json
+Content-Type: application/json
+{
+    "CollectionId": "000000-000000-000000",
+    "OwnerId": "000000-000000-000000",
+    "CustomDeckId": "000000-000000-000000",
+    "Name": "Divine Lightning",
+    "Description": "Deals 3 damage to any target. Fast and deadly.",
+    "Number": 123,
+    "ManaCost": "01 red",
+    "Label": "Instant",
+    "Code": "M21",
+    "Foil": true
+}

@@ -1,0 +1,19 @@
+@api = https://localhost:3001
+@endpoint = card
+@card_id = 200525-6HdA5s-105531
+
+PUT {{api}}/{{endpoint}}/{{card_id}}
+Accept: application/json
+Content-Type: application/json
+{
+    "CollectionId": "000000-000000-000000",
+    "OwnerId": "000000-000000-000000",
+    "CustomDeckId": "000000-000000-000000",
+    "Name": "Divine Lightning (Not Foil)",
+    "Description": "Deals 3 damage to any target. Fast and deadly.",
+    "Number": 123,
+    "ManaCost": "01 red",
+    "Label": "Instant",
+    "Code": "M21",
+    "Foil": false
+}

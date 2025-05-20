@@ -3,6 +3,7 @@ using Api.Infrastructure.Entities;
 using Api.Shared.Extensions;
 using Api.Shared.Interfaces.Services;
 using Api.Shared.Utils;
+using Microsoft.EntityFrameworkCore;
 using Model.DTOs.Card;
 
 namespace Api.Infrastructure.Services;
@@ -93,4 +94,5 @@ public class CardService : ICardService
 
         return targetCard.ToResponseDTO();
     }
+
 }
