@@ -6,6 +6,7 @@ Accept: application/json
 Content-Type: application/json
 {
     "Name": "Created Collection",
+    "Description": "The collection description",
     "Amount": 88,
     "IconUrl": "....",
     "ReleaseYear": 2025

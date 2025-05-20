@@ -1,9 +1,13 @@
 @api = https://localhost:3001
 @endpoint = collection
-@collection_id = 130525-MfhmrX-163338
+@collection_id = 200525-o6c2d3-160221
 
 GET {{api}}/{{endpoint}}/
 Accept: application/json
 
+###
+
 GET {{api}}/{{endpoint}}/{{collection_id}}
 Accept: application/json
+
+###

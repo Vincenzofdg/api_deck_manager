@@ -13,7 +13,7 @@ public class CollectionEntity
     public required string Description { get; set; }
     [Range(1, int.MaxValue, ErrorMessage = "Must provide collection's total number of cards")]
     public int Amount { get; set; }
-    [Required(ErrorMessage = "Must provide icon for collection")]
+    [StringLength(200, MinimumLength = 2, ErrorMessage = "Must provide a icon url")]
     public required string IconUrl { get; set; }
     public int ReleaseYear { get; set; }
 }
