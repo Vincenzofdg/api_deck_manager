@@ -2,6 +2,7 @@
 using Api.Shared.Extensions;
 using Api.Shared.Interfaces.Services;
 using Api.Shared.Utils;
+using Microsoft.EntityFrameworkCore;
 using Model.DTOs.Collection;
 
 namespace Api.Infrastructure.Services;
@@ -12,22 +13,26 @@ public class CollectionService : ICollectionService
 
     public CollectionService(ApiConfig context) => _context = context;
 
-    public IQueryable<CollectionResponseDTO> GetAll()
+    public async Task<List<CollectionResponseDTO>> GetAll(int skip, int take)
     {
-        return _context.Collection
+        var listAllQuery = _context.Collection
             .OrderBy(c => c.Id)
-            .Select(collection => collection.ToResponseDTO());
+            .Select(collection => collection.ToResponseDTO())
+            .Skip(skip)
+            .Take(take);
+
+        return await listAllQuery.ToListAsync();
     }
 
-    public CollectionResponseDTO? GetById(string collectionId)
+    public async Task<CollectionResponseDTO?> GetById(string collectionId)
     {
-        var result = _context.Collection
-            .FirstOrDefault(collection => collection.Id == collectionId);
+        var result = await _context.Collection
+            .FirstOrDefaultAsync(collection => collection.Id == collectionId);
 
         return result?.ToResponseDTO();
     }
 
-    public CollectionResponseDTO CreateCollection(CollectionDTO collection)
+    public async Task<CollectionResponseDTO> CreateCollection(CollectionDTO collection)
     {
         var newId = IdGenerator.GenerateUniqueId();
 
@@ -35,33 +40,33 @@ public class CollectionService : ICollectionService
         var responseDto = collectionToBeAdded.ToResponseDTO();
 
         _context.Collection.Add(collectionToBeAdded);
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
 
         return responseDto;
     }
 
-    public bool UpdateCollection(string collectionId, CollectionDTO payload)
+    public async Task<bool> UpdateCollection(string collectionId, CollectionDTO payload)
     {
-        CollectionEntity? targetCollection = _context.Collection.FirstOrDefault(c => c.Id == collectionId);
+        CollectionEntity? targetCollection = await _context.Collection.FirstOrDefaultAsync(c => c.Id == collectionId);
 
         if (targetCollection == null)
             return false;
 
         targetCollection.UpdateFromDTO(payload);
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
 
         return true;
     }
 
-    public CollectionResponseDTO? DeleteCollection(string collectionId)
+    public async Task<CollectionResponseDTO?> DeleteCollection(string collectionId)
     {
-        CollectionEntity? targetCollection = _context.Collection.FirstOrDefault(c => c.Id == collectionId);
+        CollectionEntity? targetCollection = await _context.Collection.FirstOrDefaultAsync(c => c.Id == collectionId);
 
         if (targetCollection == null)
             return null;
 
         _context.Remove(targetCollection);
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
 
         return targetCollection.ToResponseDTO();
     }
