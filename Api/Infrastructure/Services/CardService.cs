@@ -14,50 +14,55 @@ public class CardService : ICardService
 
     public CardService(ApiConfig context) => _context = context;
 
-    public IQueryable<CardResponseDTO> GetAll()
+    public async Task<List<CardResponseDTO>> GetAll(int skip, int take)
     {
-        return _context.Cards
+        var listAllQuery = _context.Cards
             .OrderBy(c => c.Id)
-            .Select(card => card.ToResponseDTO());
+            .Select(card => card.ToResponseDTO())
+            .Skip(skip)
+            .Take(take);
+
+        return await listAllQuery.ToListAsync();
     }
 
-    public CardResponseDTO? GetById(string cardId)
+    public async Task<CardResponseDTO?> GetById(string cardId)
     {
-        var result = _context.Cards
-            .FirstOrDefault(card => card.Id == cardId);
+        var result = await _context.Cards
+            .FirstOrDefaultAsync(card => card.Id == cardId);
 
         return result?.ToResponseDTO();
     }
 
-    public CardResponseDTO CreateCard(CardDTO card)
+    public async Task<CardResponseDTO> CreateCard(CardDTO card)
     {
         var newId = IdGenerator.GenerateUniqueId();
 
         var cardToBeAdded = card.ToEntity(newId);
         var responseDto = cardToBeAdded.ToResponseDTO();
 
-        _context.Cards.Add(cardToBeAdded);
-        _context.SaveChanges();
+        await _context.Cards.AddAsync(cardToBeAdded);
+        await _context.SaveChangesAsync();
 
         return responseDto;
     }
 
-    public bool UpdateCard(string cardId, CardDTO payload)
+    public async Task<bool> UpdateCard(string cardId, CardDTO payload)
     {
-        CardEntity? targetCard = _context.Cards.FirstOrDefault(c => c.Id == cardId);
+        CardEntity? targetCard = await _context.Cards.FirstOrDefaultAsync(c => c.Id == cardId);
 
         if (targetCard == null)
             return false;
 
         targetCard.UpdateFromDTO(payload);
-        _context.SaveChanges();
+
+        await _context.SaveChangesAsync();
 
         return true;
     }
 
-    public List<string>? UpdateCardPartial(string cardId, JsonElement payload)
+    public async Task<List<string>?> UpdateCardPartial(string cardId, JsonElement payload)
     {
-        CardEntity? targetCard = _context.Cards.FirstOrDefault(c => c.Id == cardId);
+        CardEntity? targetCard = await _context.Cards.FirstOrDefaultAsync(c => c.Id == cardId);
 
         if (targetCard == null)
             return null;
@@ -77,22 +82,21 @@ public class CardService : ICardService
             }
         }
 
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
 
         return updatedFields;
     }
 
-    public CardResponseDTO? DeleteCard(string cardId)
+    public async Task<CardResponseDTO?> DeleteCard(string cardId)
     {
-        CardEntity? targetCard = _context.Cards.FirstOrDefault(c => c.Id == cardId);
+        CardEntity? targetCard = await _context.Cards.FirstOrDefaultAsync(c => c.Id == cardId);
 
         if (targetCard == null)
             return null;
 
         _context.Remove(targetCard);
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
 
         return targetCard.ToResponseDTO();
     }
-
 }

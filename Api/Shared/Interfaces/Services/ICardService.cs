@@ -5,10 +5,10 @@ namespace Api.Shared.Interfaces.Services;
 
 public interface ICardService
 {
-    IQueryable<CardResponseDTO> GetAll();
-    CardResponseDTO? GetById(string cardId);
-    CardResponseDTO CreateCard(CardDTO card);
-    bool UpdateCard(string cardId, CardDTO payload);
-    List<string>? UpdateCardPartial(string cardId, JsonElement payload);
-    CardResponseDTO? DeleteCard(string cardId);
+    Task<List<CardResponseDTO>> GetAll(int skip, int take);
+    Task<CardResponseDTO?> GetById(string cardId);
+    Task<CardResponseDTO> CreateCard(CardDTO card);
+    Task<bool> UpdateCard(string cardId, CardDTO payload);
+    Task<List<string>?> UpdateCardPartial(string cardId, JsonElement payload);
+    Task<CardResponseDTO?> DeleteCard(string cardId);
 }

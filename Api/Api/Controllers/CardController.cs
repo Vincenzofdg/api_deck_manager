@@ -15,20 +15,18 @@ public class CardController : ControllerBase
 
     [HttpGet(Name = "GetCard")]
     [ProducesResponseType(statusCode: 200)]
-    public IEnumerable<CardResponseDTO> Get([FromQuery] int skip = 0, [FromQuery] int take = 20)
+    public async Task<IEnumerable<CardResponseDTO>> Get([FromQuery] int skip = 0, [FromQuery] int take = 20)
     {
         if (take > 100) take = 100;
 
-        return _cardService.GetAll()
-            .Skip(skip)
-            .Take(take);
+        return await _cardService.GetAll(skip, take);
     }
 
     [HttpGet("{cardId}", Name = "GetCardById")]
     [ProducesResponseType(statusCode: 200)]
-    public ActionResult<CardResponseDTO> GetById([FromRoute] string cardId)
+    public async Task<ActionResult<CardResponseDTO>> GetById([FromRoute] string cardId)
     {
-        var result = _cardService.GetById(cardId);
+        var result = await _cardService.GetById(cardId);
 
         if (result == null)
             return NotFound();
@@ -38,18 +36,18 @@ public class CardController : ControllerBase
 
     [HttpPost(Name = "AddCard")]
     [ProducesResponseType(statusCode: 201)]
-    public IActionResult CreateCard([FromBody] CardDTO card)
+    public async Task<IActionResult> CreateCard([FromBody] CardDTO card)
     {
-        var result = _cardService.CreateCard(card);
+        var result = await _cardService.CreateCard(card);
 
         return CreatedAtAction(nameof(GetById), new { cardId = result.Id }, result);
     }
 
     [HttpPut("{cardId}", Name = "UpdateCard")]
     [ProducesResponseType(statusCode: 204)]
-    public IActionResult UpdateCard([FromRoute] string cardId, [FromBody] CardDTO payload)
+    public async Task<IActionResult> UpdateCard([FromRoute] string cardId, [FromBody] CardDTO payload)
     {
-        var result = _cardService.UpdateCard(cardId, payload);
+        var result = await _cardService.UpdateCard(cardId, payload);
 
         if (!result)
             return NotFound();
@@ -59,14 +57,14 @@ public class CardController : ControllerBase
 
     [HttpPatch("{cardId}", Name = "UpdateCardPartial")]
     [ProducesResponseType(StatusCodes.Status202Accepted)]
-    public IActionResult UpdateCardPartial(
+    public async Task<IActionResult> UpdateCardPartial(
         [FromRoute] string cardId,
         [FromBody] JsonElement patchPayload)
     {
         if (patchPayload.ValueKind != JsonValueKind.Array)
             return BadRequest();
 
-        var result = _cardService.UpdateCardPartial(cardId, patchPayload);
+        var result = await _cardService.UpdateCardPartial(cardId, patchPayload);
 
         if (result == null)
             return NotFound();
@@ -81,9 +79,9 @@ public class CardController : ControllerBase
 
     [HttpDelete("{cardId}", Name = "DeleteCard")]
     [ProducesResponseType(statusCode: 202)]
-    public IActionResult DeleteCard([FromRoute] string cardId)
+    public async Task<IActionResult> DeleteCard([FromRoute] string cardId)
     {
-        var result = _cardService.DeleteCard(cardId);
+        var result = await _cardService.DeleteCard(cardId);
 
         if (result == null)
             return NotFound();
