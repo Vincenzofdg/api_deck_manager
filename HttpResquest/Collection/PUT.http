@@ -1,0 +1,14 @@
+@api = https://localhost:3001
+@endpoint = collection
+@collection_id = 130525-MfhmrX-163338
+
+PUT {{api}}/{{endpoint}}/{{card_id}}
+Accept: application/json
+Content-Type: application/json
+{
+    "Name": "Collection Name",
+    "Description": "Generic Description",
+    "Amount": 60,
+    "IconUrl": "....",
+    "ReleaseYear": 2025
+}

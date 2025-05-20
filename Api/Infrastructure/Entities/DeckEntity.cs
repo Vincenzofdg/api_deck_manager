@@ -8,10 +8,10 @@ public class DeckEntity
     [Required]
     public string? Id { get; set; }
     [Required(ErrorMessage = "Must have a owner")]
-    public string OwnerId { get; set; }
+    public required string OwnerId { get; set; }
     [Required(ErrorMessage = "Must provide deck's type")]
-    public string TypeId { get; set; }
+    public required string TypeId { get; set; }
     [Required(ErrorMessage = "Must provide collection's name")]
-    public string Name { get; set; }
-    public string Description { get; set; }
+    public required string Name { get; set; }
+    public required string Description { get; set; }
 }

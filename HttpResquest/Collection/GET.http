@@ -1,0 +1,9 @@
+@api = https://localhost:3001
+@endpoint = collection
+@collection_id = 130525-MfhmrX-163338
+
+GET {{api}}/{{endpoint}}/
+Accept: application/json
+
+GET {{api}}/{{endpoint}}/{{collection_id}}
+Accept: application/json

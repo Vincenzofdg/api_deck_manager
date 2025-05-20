@@ -7,8 +7,8 @@ public class UserEntity
     [Key]
     [Required]
     public string? Id { get; set; }
-    public string Name { get; set; }
-    public string Email { get; set; }
+    public required string Name { get; set; }
+    public required string Email { get; set; }
     public int TotalCards { get; set; }
     public int TotalDecks { get; set; }
 }

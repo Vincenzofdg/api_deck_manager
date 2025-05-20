@@ -70,7 +70,7 @@ DotNetEnv
 ```ssh
 Add-Migration migrationName
 or
-Add-Migration migrationName -OutputDir teste\Migrations
+Add-Migration migrationName -OutputDir Infrastructure\Migrations -Verbose
 ```
 
 ### Update

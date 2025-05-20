@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace api_deck_manager.Infrastructure.Migrations
+namespace Api.Infrastructure.Migrations
 {
     [DbContext(typeof(ApiConfig))]
     partial class ApiConfigModelSnapshot : ModelSnapshot
@@ -78,6 +78,11 @@ namespace api_deck_manager.Infrastructure.Migrations
                     b.Property<int>("Amount")
                         .HasColumnType("int");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("varchar(300)");
+
                     b.Property<string>("IconUrl")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -93,53 +98,6 @@ namespace api_deck_manager.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Collection");
-                });
-
-            modelBuilder.Entity("Api.Infrastructure.Entities.DeckEntity", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("OwnerId")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("TypeId")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Decks");
-                });
-
-            modelBuilder.Entity("Api.Infrastructure.Entities.TypeEntity", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("Total")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Types");
                 });
 #pragma warning restore 612, 618
         }

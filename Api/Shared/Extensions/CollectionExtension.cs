@@ -11,6 +11,7 @@ public static class CollectionExtension
         {
             Id = newId,
             Name = dto.Name,
+            Description = dto.Description,
             Amount = dto.Amount,
             IconUrl = dto.IconUrl,
             ReleaseYear = dto.ReleaseYear
@@ -23,6 +24,7 @@ public static class CollectionExtension
         {
             Id = entity.Id,
             Name = entity.Name,
+            Description = entity.Description,
             Amount = entity.Amount,
             IconUrl = entity.IconUrl,
             ReleaseYear = entity.ReleaseYear
@@ -35,6 +37,7 @@ public static class CollectionExtension
         {
             Id = newId,
             Name = dto.Name,
+            Description = dto.Description,
             Amount = dto.Amount,
             IconUrl = dto.IconUrl,
             ReleaseYear = dto.ReleaseYear
@@ -44,6 +47,7 @@ public static class CollectionExtension
     public static void UpdateFromDTO(this CollectionEntity entity, CollectionDTO dto)
     {
         entity.Name = dto.Name;
+        entity.Description = dto.Description;
         entity.Amount = dto.Amount;
         entity.IconUrl = dto.IconUrl;
         entity.ReleaseYear = dto.ReleaseYear;

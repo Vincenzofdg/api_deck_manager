@@ -8,6 +8,13 @@
 	<NoWarn>$(NoWarn);1591</NoWarn>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Api\Infrastructure\**" />
+    <Content Remove="Api\Infrastructure\**" />
+    <EmbeddedResource Remove="Api\Infrastructure\**" />
+    <None Remove="Api\Infrastructure\**" />
+  </ItemGroup>
+
     <ItemGroup>
         <Content Include="Properties\launchSettings.json" />
     </ItemGroup>
@@ -30,7 +37,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Aspire.ServiceDefaults\Aspire.ServiceDefaults.csproj" />
     <ProjectReference Include="..\Model\Model.csproj" />
   </ItemGroup>
 	

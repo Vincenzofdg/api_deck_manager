@@ -1,0 +1,12 @@
+@api = https://localhost:3001
+@endpoint = collection
+
+POST {{api}}/{{endpoint}}/
+Accept: application/json
+Content-Type: application/json
+{
+    "Name": "Created Collection",
+    "Amount": 88,
+    "IconUrl": "....",
+    "ReleaseYear": 2025
+}

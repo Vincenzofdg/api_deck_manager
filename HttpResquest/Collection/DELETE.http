@@ -1,0 +1,8 @@
+@api = https://localhost:3001
+@endpoint = collection
+@collection_id = 130525-MfhmrX-163338
+
+DELETE {{api}}/{{endpoint}}/{{collection_id}}
+Accept: application/json
+
+###
