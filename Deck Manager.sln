@@ -11,6 +11,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpResquest", "HttpResquest\HttpResquest.csproj", "{4410A7E8-B0EC-49EA-8008-CA2D450D773A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backend", "Backend", "{DF59177C-50F1-4406-B06A-7857B520345C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Orchestrator", "Orchestrator", "{8AFBBC25-C004-4142-BC9C-2E1A83127E33}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,6 +42,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CABC2B09-29A0-429D-86D2-14C31A991035} = {DF59177C-50F1-4406-B06A-7857B520345C}
+		{9F69365D-9B00-4E32-919B-860D8D8DE44E} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{B6DA14D5-2DBF-48D1-89D9-54A0593DB951} = {DF59177C-50F1-4406-B06A-7857B520345C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {90A00300-4509-4262-9709-EB9A069BCD86}
