@@ -1,0 +1,8 @@
+@api = https://localhost:3001
+@endpoint = type
+@type_id = 210525-LnvMoI-114937
+
+DELETE {{api}}/{{endpoint}}/{{type_id}}
+Accept: application/json
+
+###

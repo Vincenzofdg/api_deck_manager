@@ -1,0 +1,14 @@
+@api = https://localhost:3001
+@endpoint = type
+@type_id = 210525-LnvMoI-114937
+
+PUT {{api}}/{{endpoint}}/{{type_id}}
+Accept: application/json
+Content-Type: application/json
+{
+    "Name": "TESTANDO",
+    "Description": "Generic Description Test",
+    "Total": 60
+}
+
+###

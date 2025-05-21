@@ -33,6 +33,7 @@ builder.Services.AddDbContext<ApiConfig>(options =>
 // Add services to Scope
 builder.Services.AddScoped<ICardService, CardService>();
 builder.Services.AddScoped<ICollectionService, CollectionService>();
+builder.Services.AddScoped<ITypeSevice, TypeService>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>

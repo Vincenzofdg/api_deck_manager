@@ -7,6 +7,7 @@ namespace Api.Infrastructure;
 public class ApiConfig : DbContext
 {
     public DbSet<CollectionEntity> Collection { get; set; }
+    public DbSet<TypeEntity> Type { get; set; }
 
     public DbSet<CardEntity> Cards { get; set; }
     //public DbSet<DeckEntity> Decks { get; set; }
@@ -17,7 +18,7 @@ public class ApiConfig : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfiguration(new CollectionConfiguration());
-
+        modelBuilder.ApplyConfiguration(new TypeConfiguration());
         // has fks
         modelBuilder.ApplyConfiguration(new CardConfiguration());
     }
