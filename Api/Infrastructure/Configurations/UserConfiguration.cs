@@ -28,5 +28,15 @@ public class UserConfiguration : IEntityTypeConfiguration<UserEntity>
                    .IsRequired()
                    .HasMaxLength(200)
                    .HasColumnName("email");
+
+        // seeding table
+        entity.HasData(
+            new UserEntity
+            {
+                Id = "210525-G3nVW2-160305",
+                Name = "Vincenzo F. Di Giacomo",
+                Email = "vincenzo@email.com"
+            }
+        );
     }
 }

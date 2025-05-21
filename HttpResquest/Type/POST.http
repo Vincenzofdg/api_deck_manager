@@ -5,9 +5,9 @@ POST {{api}}/{{endpoint}}/
 Accept: application/json
 Content-Type: application/json
 {
-    "Name": "tESTE",
-    "Description": "Generic Description",
-    "Total": 100
+  "Name": "Pauper",
+  "Description": "A format where only common-rarity cards are allowed, promoting budget-friendly and strategic gameplay.",
+  "Total": 60
 }
 
 ###
