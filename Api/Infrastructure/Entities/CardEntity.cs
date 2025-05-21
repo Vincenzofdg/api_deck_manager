@@ -9,9 +9,6 @@ public class CardEntity
     public required string Id { get; set; }
     [Required(ErrorMessage = "Must provide Card's collection")]
     public required string CollectionId { get; set; }
-    [Required(ErrorMessage = "Must provide Card's owner")]
-    public required string OwnerId { get; set; }
-    public string? CustomDeckId { get; set; }
     [Required(ErrorMessage = "Must provide Card's name")]
     [StringLength(150, MinimumLength = 2, ErrorMessage = "Name must be between 2 and 150 characters")]
     public required string Name { get; set; }

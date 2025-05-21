@@ -16,4 +16,7 @@ public class CollectionEntity
     [StringLength(200, MinimumLength = 2, ErrorMessage = "Must provide a icon url")]
     public required string IconUrl { get; set; }
     public int ReleaseYear { get; set; }
+
+    public ICollection<CardEntity>? Cards { get; set; }
+    //public List<CardEntity>? Cards { get; set; }
 }

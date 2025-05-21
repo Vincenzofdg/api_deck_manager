@@ -5,15 +5,13 @@ POST {{api}}/{{endpoint}}/
 Accept: application/json
 Content-Type: application/json
 {
-    "CollectionId": "000000-000000-000000",
-    "OwnerId": "000000-000000-000000",
-    "CustomDeckId": "000000-000000-000000",
-    "Name": "Divine Lightning",
-    "Description": "Deals 3 damage to any target. Fast and deadly.",
-    "Number": 123,
-    "ManaCost": "01 red",
-    "Label": "Instant",
-    "Code": "M21",
+    "CollectionId": "210525-3jP6J4-160849",
+    "Name": "Beamtown Beatstick",
+    "Description": "Equipment that gives menace and creates a Treasure token when the equipped creature deals combat damage.",
+    "Number": 139,
+    "ManaCost": "1 red",
+    "Label": "Artifact — Equipment",
+    "Code": "MOM",
     "Foil": true
 }
 

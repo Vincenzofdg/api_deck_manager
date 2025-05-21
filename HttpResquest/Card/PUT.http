@@ -1,21 +1,18 @@
 @api = https://localhost:3001
 @endpoint = card
-@card_id = 200525-6HdA5s-105531
+@card_id = 210525-iG7vsn-174032
 
 PUT {{api}}/{{endpoint}}/{{card_id}}
 Accept: application/json
 Content-Type: application/json
 {
-    "CollectionId": "000000-000000-000000",
-    "OwnerId": "000000-000000-000000",
-    "CustomDeckId": "000000-000000-000000",
-    "Name": "Divine Lightning (Not Foil)",
-    "Description": "Deals 3 damage to any target. Fast and deadly.",
-    "Number": 123,
-    "ManaCost": "01 red",
-    "Label": "Instant",
-    "Code": "M21",
+    "CollectionId": "210525-3jP6J4-160849",
+    "Name": "Akki Scrapchomper",
+    "Description": "A goblin creature that can be sacrificed to destroy an artifact.",
+    "Number": 137,
+    "ManaCost": "1 red",
+    "Label": "Creature — Goblin Warrior",
+    "Code": "MOM",
     "Foil": false
 }
-
 ###

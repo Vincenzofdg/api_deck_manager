@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Api.Infrastructure.Migrations
 {
     [DbContext(typeof(ApiConfig))]
-    [Migration("20250521192616_BaseMigration")]
+    [Migration("20250521203421_BaseMigration")]
     partial class BaseMigration
     {
         /// <inheritdoc />
@@ -40,10 +40,6 @@ namespace Api.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(255)")
                         .HasColumnName("collection_id");
-
-                    b.Property<string>("CustomDeckId")
-                        .HasColumnType("longtext")
-                        .HasColumnName("custom_deck_id");
 
                     b.Property<string>("Description")
                         .HasMaxLength(300)
@@ -77,11 +73,6 @@ namespace Api.Infrastructure.Migrations
                     b.Property<int>("Number")
                         .HasColumnType("int")
                         .HasColumnName("number");
-
-                    b.Property<string>("OwnerId")
-                        .IsRequired()
-                        .HasColumnType("longtext")
-                        .HasColumnName("owner_id");
 
                     b.HasKey("Id")
                         .HasName("PK_Card_Id");
@@ -271,12 +262,18 @@ namespace Api.Infrastructure.Migrations
             modelBuilder.Entity("Api.Infrastructure.Entities.CardEntity", b =>
                 {
                     b.HasOne("Api.Infrastructure.Entities.CollectionEntity", "Collection")
-                        .WithMany()
+                        .WithMany("Cards")
                         .HasForeignKey("CollectionId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("FK_Card_Collection");
 
                     b.Navigation("Collection");
+                });
+
+            modelBuilder.Entity("Api.Infrastructure.Entities.CollectionEntity", b =>
+                {
+                    b.Navigation("Cards");
                 });
 #pragma warning restore 612, 618
         }

@@ -11,8 +11,6 @@ namespace Api.Shared.Extensions
             {
                 Id = newId,
                 CollectionId = dto.CollectionId,
-                OwnerId = dto.OwnerId,
-                CustomDeckId = dto.CustomDeckId,
                 Name = dto.Name,
                 Description = dto.Description,
                 Number = dto.Number,
@@ -29,8 +27,6 @@ namespace Api.Shared.Extensions
             {
                 Id = entity.Id,
                 CollectionId = entity.CollectionId,
-                OwnerId = entity.OwnerId,
-                CustomDeckId = entity.CustomDeckId,
                 Name = entity.Name,
                 Description = entity.Description,
                 Number = entity.Number,
@@ -47,8 +43,6 @@ namespace Api.Shared.Extensions
             {
                 Id = newId,
                 CollectionId = dto.CollectionId,
-                OwnerId = dto.OwnerId,
-                CustomDeckId = dto.CustomDeckId,
                 Name = dto.Name,
                 Description = dto.Description,
                 Number = dto.Number,
@@ -62,8 +56,6 @@ namespace Api.Shared.Extensions
         public static void UpdateFromDTO(this CardEntity entity, CardDTO dto)
         {
             entity.CollectionId = dto.CollectionId;
-            entity.OwnerId = dto.OwnerId;
-            entity.CustomDeckId = dto.CustomDeckId;
             entity.Name = dto.Name;
             entity.Description = dto.Description;
             entity.Number = dto.Number;

@@ -5,10 +5,6 @@ public interface ICardDTO
 
     string CollectionId { get; set; }
 
-    string OwnerId { get; set; }
-
-    string? CustomDeckId { get; set; }
-
     string Name { get; set; }
 
     string? Description { get; set; }

@@ -24,13 +24,6 @@ public class CardConfiguration : IEntityTypeConfiguration<CardEntity>
             .HasColumnName("collection_id")
             .IsRequired();
 
-        entity.Property(e => e.OwnerId)
-            .HasColumnName("owner_id")
-            .IsRequired();
-
-        entity.Property(e => e.CustomDeckId)
-            .HasColumnName("custom_deck_id");
-
         // normal fields
         entity.Property(c => c.Name)
             .IsRequired()
@@ -63,12 +56,12 @@ public class CardConfiguration : IEntityTypeConfiguration<CardEntity>
             .HasColumnName("foil")
             .HasDefaultValue(false);
 
-        // relations
-        //entity.HasOne(e => e.Collection)
 
-        //entity.HasOne(e => e.Collection)
-        //      .WithMany(c => c.Cards)
-        //      .HasForeignKey(e => e.CollectionId)
-        //      .HasConstraintName("FK_Cards_CollectionId");
+        // relations
+        entity.HasOne(c => c.Collection)
+              .WithMany(col => col.Cards)
+              .HasForeignKey(c => c.CollectionId)
+              .HasConstraintName("FK_Card_Collection")
+              .OnDelete(DeleteBehavior.Cascade);
     }
 }

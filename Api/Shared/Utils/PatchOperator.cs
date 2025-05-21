@@ -12,12 +12,6 @@ public static class PatchOperator
             case "/collectionid":
                 targetCard.CollectionId = value.GetString();
                 break;
-            case "/ownerid":
-                targetCard.OwnerId = value.GetString();
-                break;
-            case "/customdeckid":
-                targetCard.CustomDeckId = value.GetString();
-                break;
             case "/name":
                 targetCard.Name = value.GetString();
                 break;
