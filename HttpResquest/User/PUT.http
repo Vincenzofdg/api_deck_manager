@@ -1,0 +1,13 @@
+@api = https://localhost:3001
+@endpoint = user
+@user_id = 210525-f3RXgh-160130
+
+PUT {{api}}/{{endpoint}}/{{user_id}}
+Accept: application/json
+Content-Type: application/json
+{
+    "Name": "Vince",
+    "Email": "vincenzo@generic.com"
+}
+
+###

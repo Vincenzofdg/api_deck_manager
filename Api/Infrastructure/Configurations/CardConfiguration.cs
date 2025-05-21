@@ -13,7 +13,7 @@ public class CardConfiguration : IEntityTypeConfiguration<CardEntity>
 
         // id: primary key
         entity.HasKey(e => e.Id)
-            .HasName("PK_Cards_Id");
+            .HasName("PK_Card_Id");
 
         entity.Property(e => e.Id)
             .HasColumnName("id")

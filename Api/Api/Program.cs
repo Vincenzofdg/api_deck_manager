@@ -36,9 +36,11 @@ builder.Services.AddDbContext<ApiConfig>(options =>
 });
 
 // Injeção de dependência
-builder.Services.AddScoped<ICardService, CardService>();
 builder.Services.AddScoped<ICollectionService, CollectionService>();
 builder.Services.AddScoped<ITypeSevice, TypeService>();
+builder.Services.AddScoped<IUserService, UserService>();
+
+builder.Services.AddScoped<ICardService, CardService>();
 
 // Swagger/OpenAPI
 builder.Services.AddEndpointsApiExplorer();
@@ -54,12 +56,13 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddOpenApi();
 
 // OData + Controllers
-builder.Services.AddControllers()
-    .AddOData(options =>
-    {
-        options.Select().Filter().Expand().OrderBy().Count().SetMaxTop(100);
-        options.AddRouteComponents("odata", GetEdmModel());
-    });
+builder.Services.AddControllers();
+//builder.Services.AddControllers()
+//    .AddOData(options =>
+//    {
+//        options.Select().Filter().Expand().OrderBy().Count().SetMaxTop(100);
+//        options.AddRouteComponents("odata", GetEdmModel());
+//    });
 
 // Modelo OData
 IEdmModel GetEdmModel()

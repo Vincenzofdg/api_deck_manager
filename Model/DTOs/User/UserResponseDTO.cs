@@ -1,6 +1,8 @@
-﻿namespace Model.DTOs.User;
+﻿using Model.Interfaces.User;
 
-public class UserResponseDTO : UserDTO
+namespace Model.DTOs.User;
+
+public class UserResponseDTO : UserDTO, IUserResponseDTO
 {
     public required string Id { get; set; }
 }

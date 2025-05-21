@@ -14,7 +14,7 @@ public class TypeController : ControllerBase
     public TypeController(ITypeSevice typeService) => _typeService = typeService;
 
     [HttpGet(Name = "GetType")]
-    [EnableQuery()]
+    //[EnableQuery()]
     [ProducesResponseType(statusCode: 200)]
     public async Task<IEnumerable<TypeResponseDTO>> Get([FromQuery] int skip = 0, [FromQuery] int take = 20)
     {

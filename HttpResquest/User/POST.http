@@ -1,0 +1,12 @@
+@api = https://localhost:3001
+@endpoint = user
+
+POST {{api}}/{{endpoint}}/
+Accept: application/json
+Content-Type: application/json
+{
+    "Name": "Vincenzo F. Di Giacomo",
+    "Email": "vincenzo@generic.com"
+}
+
+###

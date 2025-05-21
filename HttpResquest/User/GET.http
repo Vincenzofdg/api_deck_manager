@@ -1,0 +1,13 @@
+@api = https://localhost:3001
+@endpoint = user
+@user_id = 210525-oUVFZ6-160004
+
+GET {{api}}/{{endpoint}}/
+Accept: application/json
+
+###
+
+GET {{api}}/{{endpoint}}/{{user_id}}
+Accept: application/json
+
+###
