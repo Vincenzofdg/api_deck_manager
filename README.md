@@ -14,6 +14,10 @@ Pomelo.EntityFrameworkCore.MySql
 Swashbuckle.AspNetCore
 xunit
 DotNetEnv
+
+
+Install-Package Microsoft.AspNetCore.OData
+
 ```
 
 <hr />

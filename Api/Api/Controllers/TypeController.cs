@@ -1,5 +1,6 @@
 ﻿using Api.Shared.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Query;
 using Model.DTOs.Type;
 
 namespace Api.Api.Controllers;
@@ -13,6 +14,7 @@ public class TypeController : ControllerBase
     public TypeController(ITypeSevice typeService) => _typeService = typeService;
 
     [HttpGet(Name = "GetType")]
+    [EnableQuery()]
     [ProducesResponseType(statusCode: 200)]
     public async Task<IEnumerable<TypeResponseDTO>> Get([FromQuery] int skip = 0, [FromQuery] int take = 20)
     {
