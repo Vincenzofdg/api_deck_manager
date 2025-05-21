@@ -6,7 +6,7 @@ public class CollectionEntity
 {
     [Key]
     [Required]
-    public string? Id { get; set; }
+    public required string Id { get; set; }
     [StringLength(150, MinimumLength = 2, ErrorMessage = "Must provide Collection's Name")]
     public required string Name { get; set; }
     [StringLength(300, MinimumLength = 2, ErrorMessage = "Must provide a description")]

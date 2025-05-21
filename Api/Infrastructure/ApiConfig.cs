@@ -1,17 +1,24 @@
-﻿using Api.Infrastructure.Entities;
+﻿using Api.Infrastructure.Configurations;
+using Api.Infrastructure.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Api.Infrastructure
+namespace Api.Infrastructure;
+
+public class ApiConfig : DbContext
 {
-    public class ApiConfig : DbContext
+    public DbSet<CollectionEntity> Collection { get; set; }
+
+    public DbSet<CardEntity> Cards { get; set; }
+    //public DbSet<DeckEntity> Decks { get; set; }
+    //public DbSet<TypeEntity> Types { get; set; }
+
+    public ApiConfig(DbContextOptions<ApiConfig> options) : base(options) { }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        public DbSet<CardEntity> Cards { get; set; }
-        //public DbSet<DeckEntity> Decks { get; set; }
-        //public DbSet<TypeEntity> Types { get; set; }
-        public DbSet<CollectionEntity> Collection { get; set; }
+        modelBuilder.ApplyConfiguration(new CollectionConfiguration());
 
-        // base(opts) => passagem das opcoes (opts) para o construtor da classe que estamos extendendo (DbContext)
-        public ApiConfig(DbContextOptions<ApiConfig> options) : base(options) { }
-
+        // has fks
+        modelBuilder.ApplyConfiguration(new CardConfiguration());
     }
 }

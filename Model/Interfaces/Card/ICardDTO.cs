@@ -7,11 +7,11 @@ public interface ICardDTO
 
     string OwnerId { get; set; }
 
-    string CustomDeckId { get; set; }
+    string? CustomDeckId { get; set; }
 
     string Name { get; set; }
 
-    string Description { get; set; }
+    string? Description { get; set; }
 
     int Number { get; set; }
 

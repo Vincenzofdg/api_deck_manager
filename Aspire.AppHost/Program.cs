@@ -1,4 +1,4 @@
-//var builder = DistributedApplication.CreateBuilder(args);
+var builder = DistributedApplication.CreateBuilder(args);
 
 //// MySQL Container
 //var mysql = builder.AddMySql("mysql")
@@ -8,10 +8,10 @@
 
 //var mysqldb = mysql.AddDatabase("mysqldb");
 
-//// API Project
-//builder.AddProject<Projects.Api>("Backend")
-//    .WithReference(mysqldb)
-//    .WaitFor(mysqldb);
+// API Project
+builder.AddProject<Projects.Api>("Backend");
+    //.WithReference(mysqldb)
+    //.WaitFor(mysqldb);
 
 //// Adminer (interface web para MySQL)
 //builder.AddContainer("adminer", "adminer")
@@ -22,21 +22,6 @@
 //        e.TargetPort = 8080; // Porta dentro do container que o Adminer escuta
 //    })
 //    .WithReference(mysqldb)
-//    .WaitFor(mysqldb); ;
+//    .WaitFor(mysqldb);
 
-//builder.Build().Run();
-
-
-var builder = DistributedApplication.CreateBuilder(args);
-
-// MySQL
-var mysql = builder.AddMySql("mysql")
-    .WithEnvironment("MYSQL_ROOT_PASSWORD", "S3cur3P@ssword123!")
-    .WithEnvironment("MYSQL_DATABASE", "mysqldb")
-    .WithLifetime(ContainerLifetime.Persistent);
-
-// Adicionando banco de dados
-var mysqldb = mysql.AddDatabase("mysqldb");
-
-// Configuração do serviço MySQL
 builder.Build().Run();
