@@ -118,7 +118,10 @@ void ConfigureMiddleware(WebApplication app)
         app.UseSwagger();
         app.UseSwaggerUI(c =>
         {
-            c.SwaggerEndpoint("/swagger/v1/swagger.json", "Deck Manager v1");
+            c.SwaggerEndpoint(
+                "/swagger/v1/swagger.json",
+                "Deck Manager v1"
+            );
         });
     }
 
