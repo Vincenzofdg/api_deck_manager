@@ -8,63 +8,134 @@ using Microsoft.OData.Edm;
 using Microsoft.OData.ModelBuilder;
 using Microsoft.OpenApi.Models;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Configuração de arquivos e ambiente
-builder.AddServiceDefaults();
+// Ffile + environment configuration
+ConfigureConfiguration(builder);
 
-builder.Configuration
-    .SetBasePath(Directory.GetCurrentDirectory())
-    .AddJsonFile("Api/appsettings.json", optional: false, reloadOnChange: true);
+// data base
+ConfigureDatabase(builder);
 
-// Carregar variáveis de ambiente do .env
-DotNetEnv.Env.Load();
+// services and dependencies
+ConfigureServices(builder);
 
-string server = Environment.GetEnvironmentVariable("SERVER") ?? throw new Exception("Define 'SERVER' in .env file");
-string port = Environment.GetEnvironmentVariable("PORT") ?? throw new Exception("Define 'PORT' in .env file");
-string database = Environment.GetEnvironmentVariable("DATABASE") ?? throw new Exception("Define 'DATABASE' in .env file");
-string user = Environment.GetEnvironmentVariable("USER") ?? throw new Exception("Define 'USER' in .env file");
-string password = Environment.GetEnvironmentVariable("PASSWORD") ?? throw new Exception("Define 'PASSWORD' in .env file");
+// odata + controllers
+ConfigureControllers(builder);
 
-string connectionString = $"server={server};port={port};database={database};user={user};password={password}";
-builder.Configuration["ConnectionStrings:DeckManagerConnection"] = connectionString;
+// swagger/openapi
+ConfigureSwagger(builder);
 
-// Banco de dados
-builder.Services.AddDbContext<ApiConfig>(options =>
+// create the app
+var app = builder.Build();
+
+// middlewares + routes
+ConfigureMiddleware(app);
+
+// start
+app.Run();
+
+
+// helper methods
+void ConfigureConfiguration(WebApplicationBuilder builder)
 {
-    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
-});
+    builder.AddServiceDefaults();
 
-// Injeção de dependência
-builder.Services.AddScoped<ICollectionService, CollectionService>();
-builder.Services.AddScoped<ITypeSevice, TypeService>();
-builder.Services.AddScoped<IUserService, UserService>();
+    builder.Configuration
+        .SetBasePath(Directory.GetCurrentDirectory())
+        .AddJsonFile("Api/appsettings.json", optional: false, reloadOnChange: true);
 
-builder.Services.AddScoped<ICardService, CardService>();
+    DotNetEnv.Env.Load();
+}
 
-// Swagger/OpenAPI
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c =>
+void ConfigureDatabase(WebApplicationBuilder builder)
 {
-    c.SwaggerDoc("v1", new OpenApiInfo
+    string server = GetEnv("SERVER");
+    string port = GetEnv("PORT");
+    string database = GetEnv("DATABASE");
+    string user = GetEnv("USER");
+    string password = GetEnv("PASSWORD");
+
+    string connectionString = $"server={server};port={port};database={database};user={user};password={password}";
+    builder.Configuration["ConnectionStrings:DeckManagerConnection"] = connectionString;
+
+    builder.Services.AddDbContext<ApiConfig>(options =>
     {
-        Title = "Deck Manager API",
-        Description = "Organize and build your Deck",
-        Version = "v1"
+        options.UseMySql(
+            connectionString,
+            ServerVersion.AutoDetect(connectionString)
+        );
     });
-});
-builder.Services.AddOpenApi();
+}
 
-// OData + Controllers
-builder.Services.AddControllers();
-//builder.Services.AddControllers()
-//    .AddOData(options =>
-//    {
-//        options.Select().Filter().Expand().OrderBy().Count().SetMaxTop(100);
-//        options.AddRouteComponents("odata", GetEdmModel());
-//    });
+void ConfigureServices(WebApplicationBuilder builder)
+{
+    builder.Services.AddScoped<ICollectionService, CollectionService>();
+    builder.Services.AddScoped<ITypeSevice, TypeService>();
+    builder.Services.AddScoped<IUserService, UserService>();
+    builder.Services.AddScoped<ICardService, CardService>();
+}
 
-// Modelo OData
+void ConfigureControllers(WebApplicationBuilder builder)
+{
+    // without odata
+    //builder.Services.AddControllers();
+
+    builder.Services.AddControllers()
+        .AddOData(options =>
+        {
+            options.AddRouteComponents("odata", GetEdmModel());
+            options
+                .Select()
+                .Filter()
+                .Expand()
+                .OrderBy()
+                .Count()
+                .SetMaxTop(100);
+        });
+}
+
+void ConfigureSwagger(WebApplicationBuilder builder)
+{
+    builder.Services.AddEndpointsApiExplorer();
+    builder.Services.AddSwaggerGen(c =>
+    {
+        c.SwaggerDoc("v1", new OpenApiInfo
+        {
+            Title = "Deck Manager API",
+            Description = "Organize and build your Deck",
+            Version = "v1"
+        });
+    });
+
+    builder.Services.AddOpenApi();
+}
+
+void ConfigureMiddleware(WebApplication app)
+{
+    if (app.Environment.IsDevelopment())
+    {
+        app.UseSwagger();
+        app.UseSwaggerUI(c =>
+        {
+            c.SwaggerEndpoint("/swagger/v1/swagger.json", "Deck Manager v1");
+        });
+    }
+
+    app.UseRouting();
+    app.UseAuthorization();
+    app.MapControllers();
+
+    app.MapGet("/", context =>
+    {
+        context.Response.Redirect("/swagger");
+        return Task.CompletedTask;
+    });
+}
+
+string GetEnv(string name) =>
+    Environment.GetEnvironmentVariable(name) ?? throw new Exception($"Define '{name}' in .env file");
+
 IEdmModel GetEdmModel()
 {
     var builder = new ODataConventionModelBuilder();
@@ -72,33 +143,3 @@ IEdmModel GetEdmModel()
     builder.EntitySet<CollectionEntity>("Collections");
     return builder.GetEdmModel();
 }
-
-// Criar o app
-var app = builder.Build();
-
-// Swagger
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI(c =>
-    {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Deck Manager v1");
-    });
-}
-
-// Middlewares essenciais
-app.UseRouting();
-app.UseAuthorization();
-
-// Rotas
-app.MapControllers();
-
-// Redirecionar / para Swagger
-app.MapGet("/", context =>
-{
-    context.Response.Redirect("/swagger");
-    return Task.CompletedTask;
-});
-
-// Start
-app.Run();
