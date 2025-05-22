@@ -7,12 +7,8 @@ namespace Api.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class TypeController : ControllerBase
+public class TypeController(ITypeSevice typeService) : ControllerBase
 {
-    private readonly ITypeSevice _typeService;
-
-    public TypeController(ITypeSevice typeService) => _typeService = typeService;
-
     [HttpGet(Name = "GetType")]
     //[EnableQuery()]
     [ProducesResponseType(statusCode: 200)]
@@ -20,14 +16,14 @@ public class TypeController : ControllerBase
     {
         if (take > 100) take = 100;
 
-        return await _typeService.GetAll(skip, take);
+        return await typeService.GetAll(skip, take);
     }
 
     [HttpGet("{typeId}", Name = "GetTypeById")]
     [ProducesResponseType(statusCode: 200)]
     public async Task<ActionResult<TypeResponseDTO>> GetById([FromRoute] string typeId)
     {
-        var result = await _typeService.GetById(typeId);
+        var result = await typeService.GetById(typeId);
 
         if (result == null)
             return NotFound();
@@ -39,7 +35,7 @@ public class TypeController : ControllerBase
     [ProducesResponseType(statusCode: 204)]
     public async Task<IActionResult> UpdateCard([FromRoute] string typeId, [FromBody] TypeDTO payload)
     {
-        var result = await _typeService.UpdateType(typeId, payload);
+        var result = await typeService.UpdateType(typeId, payload);
 
         if (!result)
             return NotFound();
@@ -51,7 +47,7 @@ public class TypeController : ControllerBase
     [ProducesResponseType(statusCode: 201)]
     public async Task<IActionResult> CreateCollection([FromBody] TypeDTO type)
     {
-        var result = await _typeService.CreateType(type);
+        var result = await typeService.CreateType(type);
 
         return CreatedAtAction(nameof(GetById), new { typeId = result.Id }, result);
     }
@@ -60,7 +56,7 @@ public class TypeController : ControllerBase
     [ProducesResponseType(statusCode: 202)]
     public async Task<IActionResult> DeleteType([FromRoute] string typeId)
     {
-        var result = await _typeService.DeleteType(typeId);
+        var result = await typeService.DeleteType(typeId);
 
         if (result == null)
             return NotFound();

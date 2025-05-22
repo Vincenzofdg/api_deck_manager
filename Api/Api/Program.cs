@@ -11,7 +11,7 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Ffile + environment configuration
+// File + environment configuration
 ConfigureConfiguration(builder);
 
 // data base
@@ -74,6 +74,8 @@ void ConfigureServices(WebApplicationBuilder builder)
     builder.Services.AddScoped<ITypeSevice, TypeService>();
     builder.Services.AddScoped<IUserService, UserService>();
     builder.Services.AddScoped<ICardService, CardService>();
+    
+    
 }
 
 void ConfigureControllers(WebApplicationBuilder builder)

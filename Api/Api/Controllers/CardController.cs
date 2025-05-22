@@ -9,12 +9,8 @@ namespace Api.Api.Controllers;
 [ApiController]
 //[Route("[controller]")]
 [Route("odata/[controller]")]
-public class CardController : ControllerBase
+public class CardController(ICardService cardService) : ControllerBase
 {
-    private readonly ICardService _cardService;
-
-    public CardController(ICardService cardService) => _cardService = cardService;
-
     [HttpGet(Name = "GetCard")]
     [EnableQuery()]
     [ProducesResponseType(statusCode: 200)]
@@ -22,7 +18,7 @@ public class CardController : ControllerBase
     {
         if (take > 100) take = 100;
 
-        return await _cardService.GetAll(skip, take);
+        return await cardService.GetAll(skip, take);
     }
 
     [HttpGet("{cardId}", Name = "GetCardById")]
@@ -30,7 +26,7 @@ public class CardController : ControllerBase
     [ProducesResponseType(statusCode: 200)]
     public async Task<ActionResult<CardResponseDTO>> GetById([FromRoute] string cardId)
     {
-        var result = await _cardService.GetById(cardId);
+        var result = await cardService.GetById(cardId);
 
         if (result == null)
             return NotFound();
@@ -42,7 +38,7 @@ public class CardController : ControllerBase
     [ProducesResponseType(statusCode: 201)]
     public async Task<IActionResult> CreateCard([FromBody] CardDTO card)
     {
-        var result = await _cardService.CreateCard(card);
+        var result = await cardService.CreateCard(card);
 
         return CreatedAtAction(nameof(GetById), new { cardId = result.Id }, result);
     }
@@ -51,7 +47,7 @@ public class CardController : ControllerBase
     [ProducesResponseType(statusCode: 204)]
     public async Task<IActionResult> UpdateCard([FromRoute] string cardId, [FromBody] CardDTO payload)
     {
-        var result = await _cardService.UpdateCard(cardId, payload);
+        var result = await cardService.UpdateCard(cardId, payload);
 
         if (!result)
             return NotFound();
@@ -68,7 +64,7 @@ public class CardController : ControllerBase
         if (patchPayload.ValueKind != JsonValueKind.Array)
             return BadRequest();
 
-        var result = await _cardService.UpdateCardPartial(cardId, patchPayload);
+        var result = await cardService.UpdateCardPartial(cardId, patchPayload);
 
         if (result == null)
             return NotFound();
@@ -85,7 +81,7 @@ public class CardController : ControllerBase
     [ProducesResponseType(statusCode: 202)]
     public async Task<IActionResult> DeleteCard([FromRoute] string cardId)
     {
-        var result = await _cardService.DeleteCard(cardId);
+        var result = await cardService.DeleteCard(cardId);
 
         if (result == null)
             return NotFound();
