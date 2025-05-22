@@ -81,3 +81,50 @@ Add-Migration migrationName -OutputDir Infrastructure\Migrations -Verbose
 ```ssh
 Update-Database
 ```
+
+<hr />
+
+## OData
+
+### Filter
+```
+/odata/Cards?$filter=Name eq 'Pikachu'
+```
+
+### Pagination (top or skip)
+```
+/odata/Cards?$top=10
+/odata/Cards?$skip=5&$top=10
+```
+
+### Select
+```
+/odata/Cards?$select=Id
+/odata/Cards?$select=Id,Name
+```
+
+### Count
+```
+/odata/Cards/$count
+```
+or
+```
+/odata/Cards?$count=true
+```
+
+## Extra
+
+### Expands (only when there is navigation between entities)
+```
+/odata/$metadata
+```
+
+### See EDM (Entity Data Model)
+```
+/odata/$metadata
+```
+
+### List all EntitySets possible
+```
+/odata
+```
