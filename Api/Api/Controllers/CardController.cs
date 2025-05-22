@@ -1,12 +1,14 @@
 ﻿using System.Text.Json;
 using Api.Shared.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Query;
 using Model.DTOs.Card;
 
 namespace Api.Api.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+//[Route("[controller]")]
+[Route("odata/[controller]")]
 public class CardController : ControllerBase
 {
     private readonly ICardService _cardService;
@@ -14,6 +16,7 @@ public class CardController : ControllerBase
     public CardController(ICardService cardService) => _cardService = cardService;
 
     [HttpGet(Name = "GetCard")]
+    [EnableQuery()]
     [ProducesResponseType(statusCode: 200)]
     public async Task<IEnumerable<CardResponseDTO>> Get([FromQuery] int skip = 0, [FromQuery] int take = 20)
     {
@@ -23,6 +26,7 @@ public class CardController : ControllerBase
     }
 
     [HttpGet("{cardId}", Name = "GetCardById")]
+    [EnableQuery()]
     [ProducesResponseType(statusCode: 200)]
     public async Task<ActionResult<CardResponseDTO>> GetById([FromRoute] string cardId)
     {
