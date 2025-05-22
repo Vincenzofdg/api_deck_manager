@@ -6,26 +6,22 @@ namespace Api.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class UserController : ControllerBase
+public class UserController(IUserService userService) : ControllerBase
 {
-    private readonly IUserService _userService;
-
-    public UserController(IUserService userService) => _userService = userService;
-
     [HttpGet(Name = "GetUser")]
     [ProducesResponseType(statusCode: 200)]
     public async Task<IEnumerable<UserResponseDTO>> Get([FromQuery] int skip = 0, [FromQuery] int take = 20)
     {
         if (take > 100) take = 100;
 
-        return await _userService.GetAll(skip, take);
+        return await userService.GetAll(skip, take);
     }
 
     [HttpGet("{userId}", Name = "GetUserById")]
     [ProducesResponseType(statusCode: 200)]
     public async Task<ActionResult<UserResponseDTO>> GetById([FromRoute] string userId)
     {
-        var result = await _userService.GetById(userId);
+        var result = await userService.GetById(userId);
 
         if (result == null)
             return NotFound();
@@ -37,7 +33,7 @@ public class UserController : ControllerBase
     [ProducesResponseType(statusCode: 204)]
     public async Task<IActionResult> UpdateCard([FromRoute] string userId, [FromBody] UserDTO payload)
     {
-        var result = await _userService.UpdateUser(userId, payload);
+        var result = await userService.UpdateUser(userId, payload);
 
         if (!result)
             return NotFound();
@@ -49,7 +45,7 @@ public class UserController : ControllerBase
     [ProducesResponseType(statusCode: 201)]
     public async Task<IActionResult> CreateCollection([FromBody] UserDTO user)
     {
-        var result = await _userService.CreateUser(user);
+        var result = await userService.CreateUser(user);
 
         return CreatedAtAction(nameof(GetById), new { userId = result.Id }, result);
     }
@@ -58,7 +54,7 @@ public class UserController : ControllerBase
     [ProducesResponseType(statusCode: 202)]
     public async Task<IActionResult> DeleteType([FromRoute] string userId)
     {
-        var result = await _userService.DeleteUser(userId);
+        var result = await userService.DeleteUser(userId);
 
         if (result == null)
             return NotFound();
