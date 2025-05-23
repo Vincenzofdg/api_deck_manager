@@ -9,7 +9,6 @@ public class ApiConfig : DbContext
     public DbSet<CollectionEntity> Collection { get; set; }
     public DbSet<TypeEntity> Type { get; set; }
     public DbSet<UserEntity> User { get; set; }
-
     public DbSet<CardEntity> Cards { get; set; }
 
 
@@ -23,5 +22,6 @@ public class ApiConfig : DbContext
         // has fks
         modelBuilder.ApplyConfiguration(new CardConfiguration());
         modelBuilder.ApplyConfiguration(new UserCardConfiguration());
+        modelBuilder.ApplyConfiguration(new DeckConfiguration());
     }
 }

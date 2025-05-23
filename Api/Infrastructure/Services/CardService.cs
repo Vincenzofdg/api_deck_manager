@@ -14,7 +14,7 @@ public class CardService : ICardService
 
     public CardService(ApiConfig context) => _context = context;
 
-    public async Task<List<CardResponseDTO>> GetAll(int skip, int take)
+    public async Task<List<DeckResponseDTO>> GetAll(int skip, int take)
     {
         var listAllQuery = _context.Cards
             .OrderBy(c => c.Id)
@@ -25,7 +25,7 @@ public class CardService : ICardService
         return await listAllQuery.ToListAsync();
     }
 
-    public async Task<CardResponseDTO?> GetById(string cardId)
+    public async Task<DeckResponseDTO?> GetById(string cardId)
     {
         var result = await _context.Cards
             .FirstOrDefaultAsync(card => card.Id == cardId);
@@ -33,7 +33,7 @@ public class CardService : ICardService
         return result?.ToResponseDTO();
     }
 
-    public async Task<CardResponseDTO> CreateCard(CardDTO card)
+    public async Task<DeckResponseDTO> CreateCard(DeckDTO card)
     {
         var newId = IdGenerator.GenerateUniqueId();
 
@@ -46,7 +46,7 @@ public class CardService : ICardService
         return responseDto;
     }
 
-    public async Task<bool> UpdateCard(string cardId, CardDTO payload)
+    public async Task<bool> UpdateCard(string cardId, DeckDTO payload)
     {
         CardEntity? targetCard = await _context.Cards.FirstOrDefaultAsync(c => c.Id == cardId);
 
@@ -87,7 +87,7 @@ public class CardService : ICardService
         return updatedFields;
     }
 
-    public async Task<CardResponseDTO?> DeleteCard(string cardId)
+    public async Task<DeckResponseDTO?> DeleteCard(string cardId)
     {
         CardEntity? targetCard = await _context.Cards.FirstOrDefaultAsync(c => c.Id == cardId);
 

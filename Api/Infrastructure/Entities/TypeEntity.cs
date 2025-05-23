@@ -6,4 +6,6 @@ public class TypeEntity
     public required string Name { get; set; }
     public required string Description { get; set; }
     public int Total { get; set; }
+
+    public ICollection<DeckEntity>? Decks { get; set; }
 }

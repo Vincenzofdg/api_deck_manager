@@ -14,7 +14,7 @@ public class CardController(ICardService cardService) : ControllerBase
     [HttpGet(Name = "GetCard")]
     [EnableQuery()]
     [ProducesResponseType(statusCode: 200)]
-    public async Task<IEnumerable<CardResponseDTO>> Get([FromQuery] int skip = 0, [FromQuery] int take = 20)
+    public async Task<IEnumerable<DeckResponseDTO>> Get([FromQuery] int skip = 0, [FromQuery] int take = 20)
     {
         if (take > 100) take = 100;
 
@@ -24,7 +24,7 @@ public class CardController(ICardService cardService) : ControllerBase
     [HttpGet("{cardId}", Name = "GetCardById")]
     [EnableQuery()]
     [ProducesResponseType(statusCode: 200)]
-    public async Task<ActionResult<CardResponseDTO>> GetById([FromRoute] string cardId)
+    public async Task<ActionResult<DeckResponseDTO>> GetById([FromRoute] string cardId)
     {
         var result = await cardService.GetById(cardId);
 
@@ -36,7 +36,7 @@ public class CardController(ICardService cardService) : ControllerBase
 
     [HttpPost(Name = "AddCard")]
     [ProducesResponseType(statusCode: 201)]
-    public async Task<IActionResult> CreateCard([FromBody] CardDTO card)
+    public async Task<IActionResult> CreateCard([FromBody] DeckDTO card)
     {
         var result = await cardService.CreateCard(card);
 
@@ -45,7 +45,7 @@ public class CardController(ICardService cardService) : ControllerBase
 
     [HttpPut("{cardId}", Name = "UpdateCard")]
     [ProducesResponseType(statusCode: 204)]
-    public async Task<IActionResult> UpdateCard([FromRoute] string cardId, [FromBody] CardDTO payload)
+    public async Task<IActionResult> UpdateCard([FromRoute] string cardId, [FromBody] DeckDTO payload)
     {
         var result = await cardService.UpdateCard(cardId, payload);
 

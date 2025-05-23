@@ -5,7 +5,7 @@ namespace Api.Shared.Extensions
 {
     public static class CardExtension
     {
-        public static CardEntity ToEntity(this CardDTO dto, string newId)
+        public static CardEntity ToEntity(this DeckDTO dto, string newId)
         {
             return new CardEntity
             {
@@ -21,9 +21,9 @@ namespace Api.Shared.Extensions
             };
         }
 
-        public static CardResponseDTO ToResponseDTO(this CardEntity entity)
+        public static DeckResponseDTO ToResponseDTO(this CardEntity entity)
         {
-            return new CardResponseDTO
+            return new DeckResponseDTO
             {
                 Id = entity.Id,
                 CollectionId = entity.CollectionId,
@@ -37,9 +37,9 @@ namespace Api.Shared.Extensions
             };
         }
 
-        public static CardResponseDTO ToResponseDTO(this CardDTO dto, string newId)
+        public static DeckResponseDTO ToResponseDTO(this DeckDTO dto, string newId)
         {
-            return new CardResponseDTO
+            return new DeckResponseDTO
             {
                 Id = newId,
                 CollectionId = dto.CollectionId,
@@ -53,7 +53,7 @@ namespace Api.Shared.Extensions
             };
         }
 
-        public static void UpdateFromDTO(this CardEntity entity, CardDTO dto)
+        public static void UpdateFromDTO(this CardEntity entity, DeckDTO dto)
         {
             entity.CollectionId = dto.CollectionId;
             entity.Name = dto.Name;

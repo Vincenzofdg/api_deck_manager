@@ -3,7 +3,7 @@ using Model.Interfaces.Card;
 
 namespace Model.DTOs.Card;
 
-public class CardDTO : ICardDTO
+public class DeckDTO : IDeckDTO
 {
     [Required(ErrorMessage = "CollectionId is required")]
     public required string CollectionId { get; set; }

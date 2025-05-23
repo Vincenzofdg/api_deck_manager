@@ -1,5 +1,5 @@
 @api = https://localhost:3001
-@endpoint = card
+@endpoint = odata/card
 
 POST {{api}}/{{endpoint}}/
 Accept: application/json

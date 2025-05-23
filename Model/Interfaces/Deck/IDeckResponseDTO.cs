@@ -1,4 +1,4 @@
-﻿namespace Model.Interfaces.Card;
+﻿namespace Model.Interfaces.Deck;
 
 public interface IDeckResponseDTO : IDeckDTO
 {

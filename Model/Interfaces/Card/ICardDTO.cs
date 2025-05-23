@@ -1,6 +1,6 @@
 ﻿namespace Model.Interfaces.Card;
 
-public interface ICardDTO
+public interface IDeckDTO
 {
 
     string CollectionId { get; set; }

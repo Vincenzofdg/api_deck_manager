@@ -7,4 +7,5 @@ public class UserEntity
     public required string Email { get; set; }
 
     public ICollection<UserCardEntity>? UserCards { get; set; }
+    public ICollection<DeckEntity>? Decks { get; set; }
 }

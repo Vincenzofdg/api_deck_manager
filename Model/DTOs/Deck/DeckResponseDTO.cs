@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Model.Interfaces.Card;
+using Model.Interfaces.Deck;
 
-namespace Model.DTOs.Card;
+namespace Model.DTOs.Deck;
 
 public class DeckResponseDTO : DeckDTO, IDeckResponseDTO
 {
