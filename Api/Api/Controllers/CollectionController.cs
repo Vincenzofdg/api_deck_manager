@@ -1,6 +1,7 @@
 ﻿using Api.Shared.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 using Model.DTOs.Collection;
+using Model.DTOs.UserCard;
 
 namespace Api.Api.Controllers;
 

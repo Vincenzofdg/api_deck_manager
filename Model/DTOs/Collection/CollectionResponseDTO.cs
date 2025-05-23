@@ -3,9 +3,9 @@ using Model.Interfaces.Collection;
 
 namespace Model.DTOs.Collection;
 
-public class CollectionResponseDTO : CollectionDTO, ICollectionDTO
+public class CollectionResponseDTO : CollectionDTO, ICollectionResponseDTO
 {
     [Key]
     [Required]
-    public string? Id { get; set; }
+    public required string Id { get; set; }
 }

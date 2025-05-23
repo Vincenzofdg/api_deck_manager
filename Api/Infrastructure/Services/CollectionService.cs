@@ -4,6 +4,7 @@ using Api.Shared.Interfaces.Services;
 using Api.Shared.Utils;
 using Microsoft.EntityFrameworkCore;
 using Model.DTOs.Collection;
+using Model.DTOs.UserCard;
 
 namespace Api.Infrastructure.Services;
 

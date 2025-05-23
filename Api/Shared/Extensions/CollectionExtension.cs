@@ -1,5 +1,6 @@
 ﻿using Api.Infrastructure.Entities;
 using Model.DTOs.Collection;
+using Model.DTOs.UserCard;
 
 namespace Api.Shared.Extensions;
 

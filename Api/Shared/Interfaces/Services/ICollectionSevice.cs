@@ -1,4 +1,5 @@
 ﻿using Model.DTOs.Collection;
+using Model.DTOs.UserCard;
 
 namespace Api.Shared.Interfaces.Services;
 
