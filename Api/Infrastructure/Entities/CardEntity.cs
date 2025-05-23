@@ -13,4 +13,6 @@ public class CardEntity
     public bool Foil { get; set; }
 
     public CollectionEntity? Collection { get; set; }
+
+    public ICollection<UserCardEntity>? UserCards { get; set; }
 }

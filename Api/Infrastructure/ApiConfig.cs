@@ -22,5 +22,6 @@ public class ApiConfig : DbContext
         modelBuilder.ApplyConfiguration(new UserConfiguration());
         // has fks
         modelBuilder.ApplyConfiguration(new CardConfiguration());
+        modelBuilder.ApplyConfiguration(new UserCardConfiguration());
     }
 }
